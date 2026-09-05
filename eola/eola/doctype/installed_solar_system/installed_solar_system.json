@@ -1,0 +1,153 @@
+{
+  "doctype": "DocType",
+  "name": "Installed Solar System",
+  "module": "EOLA",
+  "engine": "InnoDB",
+  "istable": 0,
+  "editable_grid": 1,
+  "track_changes": 1,
+  "field_order": [
+    "system_name",
+    "customer",
+    "installation_date",
+    "system_status",
+    "system_type",
+    "location",
+    "latitude",
+    "longitude",
+    "total_pv_capacity",
+    "total_inverter_capacity",
+    "number_of_pv_modules",
+    "number_of_inverters",
+    "monitoring_status",
+    "last_telemetry_date",
+    "last_performance_status",
+    "notes"
+  ],
+  "fields": [
+    {
+      "label": "System Name",
+      "fieldname": "system_name",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "label": "Customer",
+      "fieldname": "customer",
+      "fieldtype": "Link",
+      "options": "ES Customer",
+      "reqd": 1
+    },
+    {
+      "label": "Installation Date",
+      "fieldname": "installation_date",
+      "fieldtype": "Date"
+    },
+    {
+      "label": "System Status",
+      "fieldname": "system_status",
+      "fieldtype": "Select",
+      "options": "Active\nInactive\nUnder Maintenance\nDecommissioned",
+      "default": "Active"
+    },
+    {
+      "label": "System Type",
+      "fieldname": "system_type",
+      "fieldtype": "Select",
+      "options": "Grid-Tied\nOff-Grid\nHybrid",
+      "reqd": 1
+    },
+    {
+      "label": "Location",
+      "fieldname": "location",
+      "fieldtype": "Small Text"
+    },
+    {
+      "label": "Latitude",
+      "fieldname": "latitude",
+      "fieldtype": "Float",
+      "description": ""
+    },
+    {
+      "label": "Longitude",
+      "fieldname": "longitude",
+      "fieldtype": "Float",
+      "description": ""
+    },
+    {
+      "label": "Total PV Capacity",
+      "fieldname": "total_pv_capacity",
+      "fieldtype": "Float",
+      "description": "kWp"
+    },
+    {
+      "label": "Total Inverter Capacity",
+      "fieldname": "total_inverter_capacity",
+      "fieldtype": "Float",
+      "description": "kW"
+    },
+    {
+      "label": "Number of PV Modules",
+      "fieldname": "number_of_pv_modules",
+      "fieldtype": "Int"
+    },
+    {
+      "label": "Number of Inverters",
+      "fieldname": "number_of_inverters",
+      "fieldtype": "Int"
+    },
+    {
+      "label": "Monitoring Status",
+      "fieldname": "monitoring_status",
+      "fieldtype": "Select",
+      "options": "Monitoring\nNot Monitoring\nSuspended",
+      "default": "Monitoring"
+    },
+    {
+      "label": "Last Telemetry Date",
+      "fieldname": "last_telemetry_date",
+      "fieldtype": "Date",
+      "read_only": 1
+    },
+    {
+      "label": "Last Performance Status",
+      "fieldname": "last_performance_status",
+      "fieldtype": "Select",
+      "options": "Normal\nWarning\nCritical\nNo Data",
+      "read_only": 1,
+      "default": "No Data"
+    },
+    {
+      "label": "Notes",
+      "fieldname": "notes",
+      "fieldtype": "Small Text"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "share": 1
+    },
+    {
+      "role": "EOLA Technician",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "report": 1,
+      "print": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "autoname": "EOLA-SYS-.#####",
+  "title_field": "system_name",
+  "show_title_field_in_link": 1
+}

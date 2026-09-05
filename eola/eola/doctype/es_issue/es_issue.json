@@ -1,0 +1,139 @@
+{
+  "doctype": "DocType",
+  "name": "ES Issue",
+  "module": "EOLA",
+  "engine": "InnoDB",
+  "istable": 0,
+  "editable_grid": 1,
+  "track_changes": 1,
+  "field_order": [
+    "subject",
+    "customer",
+    "status",
+    "priority",
+    "description",
+    "telemetry",
+    "performance_alert",
+    "ai_recommendation",
+    "installed_solar_system",
+    "service_type",
+    "resolution_details",
+    "resolution",
+    "resolved_date",
+    "notes"
+  ],
+  "fields": [
+    {
+      "label": "Subject",
+      "fieldname": "subject",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "label": "Customer",
+      "fieldname": "customer",
+      "fieldtype": "Link",
+      "options": "ES Customer"
+    },
+    {
+      "label": "Status",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "options": "New Alert\nConfirmed\nIn Progress\nOn Hold\nResolved\nClosed\nDismissed",
+      "default": "New Alert",
+      "in_list_view": 1
+    },
+    {
+      "label": "Priority",
+      "fieldname": "priority",
+      "fieldtype": "Select",
+      "options": "Low\nMedium\nHigh",
+      "default": "Medium"
+    },
+    {
+      "label": "Description",
+      "fieldname": "description",
+      "fieldtype": "Long Text"
+    },
+    {
+      "label": "Telemetry",
+      "fieldname": "telemetry",
+      "fieldtype": "Link",
+      "options": "Telemetry"
+    },
+    {
+      "label": "Performance Alert",
+      "fieldname": "performance_alert",
+      "fieldtype": "Link",
+      "options": "Performance Alert",
+      "unique": 1
+    },
+    {
+      "label": "AI Recommendation",
+      "fieldname": "ai_recommendation",
+      "fieldtype": "Link",
+      "options": "AI Recommendation"
+    },
+    {
+      "label": "Installed Solar System",
+      "fieldname": "installed_solar_system",
+      "fieldtype": "Link",
+      "options": "Installed Solar System",
+      "reqd": 1
+    },
+    {
+      "label": "Service Type",
+      "fieldname": "service_type",
+      "fieldtype": "Select",
+      "options": "Remote Work\nSite Service"
+    },
+    {
+      "label": "Resolution Details",
+      "fieldname": "resolution_details",
+      "fieldtype": "Section Break"
+    },
+    {
+      "label": "Resolution",
+      "fieldname": "resolution",
+      "fieldtype": "Long Text"
+    },
+    {
+      "label": "Resolved Date",
+      "fieldname": "resolved_date",
+      "fieldtype": "Date",
+      "read_only": 1
+    },
+    {
+      "label": "Notes",
+      "fieldname": "notes",
+      "fieldtype": "Small Text"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "share": 1
+    },
+    {
+      "role": "EOLA Technician",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "report": 1,
+      "print": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "autoname": "ES-ISS-.#####",
+  "title_field": "subject",
+  "show_title_field_in_link": 1
+}

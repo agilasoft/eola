@@ -1,0 +1,133 @@
+{
+  "doctype": "DocType",
+  "name": "Installed Equipment",
+  "module": "EOLA",
+  "engine": "InnoDB",
+  "istable": 0,
+  "editable_grid": 1,
+  "track_changes": 1,
+  "field_order": [
+    "equipment_name",
+    "installed_solar_system",
+    "item",
+    "equipment_specification",
+    "equipment_type",
+    "manufacturer",
+    "model",
+    "serial_number",
+    "installation_date",
+    "equipment_status",
+    "warranty_start",
+    "warranty_end",
+    "location_position",
+    "notes"
+  ],
+  "fields": [
+    {
+      "label": "Equipment Name",
+      "fieldname": "equipment_name",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "label": "Installed Solar System",
+      "fieldname": "installed_solar_system",
+      "fieldtype": "Link",
+      "options": "Installed Solar System",
+      "reqd": 1
+    },
+    {
+      "label": "Item",
+      "fieldname": "item",
+      "fieldtype": "Link",
+      "options": "ES Item"
+    },
+    {
+      "label": "Equipment Specification",
+      "fieldname": "equipment_specification",
+      "fieldtype": "Link",
+      "options": "EOLA Equipment Specification"
+    },
+    {
+      "label": "Equipment Type",
+      "fieldname": "equipment_type",
+      "fieldtype": "Select",
+      "options": "PV Module\nInverter\nBattery\nMeter\nSensor\nOther",
+      "reqd": 1
+    },
+    {
+      "label": "Manufacturer",
+      "fieldname": "manufacturer",
+      "fieldtype": "Data"
+    },
+    {
+      "label": "Model",
+      "fieldname": "model",
+      "fieldtype": "Data"
+    },
+    {
+      "label": "Serial Number",
+      "fieldname": "serial_number",
+      "fieldtype": "Data"
+    },
+    {
+      "label": "Installation Date",
+      "fieldname": "installation_date",
+      "fieldtype": "Date"
+    },
+    {
+      "label": "Equipment Status",
+      "fieldname": "equipment_status",
+      "fieldtype": "Select",
+      "options": "Installed\nActive\nMaintenance\nReplaced\nRemoved",
+      "default": "Installed"
+    },
+    {
+      "label": "Warranty Start",
+      "fieldname": "warranty_start",
+      "fieldtype": "Date"
+    },
+    {
+      "label": "Warranty End",
+      "fieldname": "warranty_end",
+      "fieldtype": "Date"
+    },
+    {
+      "label": "Location / Position",
+      "fieldname": "location_position",
+      "fieldtype": "Data"
+    },
+    {
+      "label": "Notes",
+      "fieldname": "notes",
+      "fieldtype": "Small Text"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "share": 1
+    },
+    {
+      "role": "EOLA Technician",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "report": 1,
+      "print": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "autoname": "EOLA-EQ-.#####",
+  "title_field": "equipment_name",
+  "show_title_field_in_link": 1
+}

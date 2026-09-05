@@ -1,0 +1,118 @@
+{
+  "doctype": "DocType",
+  "name": "Hourly Telemetry Reading",
+  "module": "EOLA",
+  "engine": "InnoDB",
+  "istable": 1,
+  "editable_grid": 1,
+  "track_changes": 0,
+  "field_order": [
+    "reading_time",
+    "ac_voltage",
+    "ac_current",
+    "ac_power",
+    "dc_voltage",
+    "dc_current",
+    "dc_power",
+    "temperature",
+    "inverter_status",
+    "expected_power",
+    "power_deviation",
+    "reading_status",
+    "remarks"
+  ],
+  "fields": [
+    {
+      "label": "Reading Time",
+      "fieldname": "reading_time",
+      "fieldtype": "Time",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "label": "AC Voltage",
+      "fieldname": "ac_voltage",
+      "fieldtype": "Float",
+      "description": "V",
+      "in_list_view": 0
+    },
+    {
+      "label": "AC Current",
+      "fieldname": "ac_current",
+      "fieldtype": "Float",
+      "description": "A",
+      "in_list_view": 0
+    },
+    {
+      "label": "AC Power",
+      "fieldname": "ac_power",
+      "fieldtype": "Float",
+      "description": "kW",
+      "in_list_view": 1
+    },
+    {
+      "label": "DC Voltage",
+      "fieldname": "dc_voltage",
+      "fieldtype": "Float",
+      "description": "V",
+      "in_list_view": 0
+    },
+    {
+      "label": "DC Current",
+      "fieldname": "dc_current",
+      "fieldtype": "Float",
+      "description": "A",
+      "in_list_view": 0
+    },
+    {
+      "label": "DC Power",
+      "fieldname": "dc_power",
+      "fieldtype": "Float",
+      "description": "kW",
+      "in_list_view": 0
+    },
+    {
+      "label": "Temperature",
+      "fieldname": "temperature",
+      "fieldtype": "Float",
+      "description": "\u00b0C",
+      "in_list_view": 0
+    },
+    {
+      "label": "Inverter Status",
+      "fieldname": "inverter_status",
+      "fieldtype": "Select",
+      "options": "Normal\nWarning\nFault\nStandby\nOffline",
+      "default": "Normal"
+    },
+    {
+      "label": "Expected Power",
+      "fieldname": "expected_power",
+      "fieldtype": "Float",
+      "description": "kW",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "label": "Power Deviation",
+      "fieldname": "power_deviation",
+      "fieldtype": "Percent",
+      "read_only": 1
+    },
+    {
+      "label": "Reading Status",
+      "fieldname": "reading_status",
+      "fieldtype": "Select",
+      "options": "Normal\nWarning\nAlert",
+      "read_only": 1
+    },
+    {
+      "label": "Remarks",
+      "fieldname": "remarks",
+      "fieldtype": "Small Text"
+    }
+  ],
+  "permissions": [],
+  "sort_field": "modified",
+  "sort_order": "DESC"
+}

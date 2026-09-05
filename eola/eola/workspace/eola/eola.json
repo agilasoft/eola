@@ -1,0 +1,119 @@
+{
+  "doctype": "Workspace",
+  "name": "EOLA",
+  "label": "EOLA",
+  "title": "EOLA",
+  "module": "EOLA",
+  "public": 1,
+  "is_hidden": 0,
+  "icon": "energy",
+  "content": "[{\"id\": \"dashboard\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"EOLA Dashboard\", \"col\": 12}}, {\"id\": \"card-0\", \"type\": \"card\", \"data\": {\"card_name\": \"Solar System Management\", \"col\": 4}}, {\"id\": \"card-1\", \"type\": \"card\", \"data\": {\"card_name\": \"Equipment Catalog\", \"col\": 4}}, {\"id\": \"card-2\", \"type\": \"card\", \"data\": {\"card_name\": \"Telemetry Monitoring\", \"col\": 4}}, {\"id\": \"card-3\", \"type\": \"card\", \"data\": {\"card_name\": \"Performance & Alerts\", \"col\": 4}}, {\"id\": \"card-4\", \"type\": \"card\", \"data\": {\"card_name\": \"AI-Assisted Maintenance\", \"col\": 4}}, {\"id\": \"card-5\", \"type\": \"card\", \"data\": {\"card_name\": \"Service & Resolution\", \"col\": 4}}]",
+  "links": [
+    {
+      "type": "Card Break",
+      "label": "Solar System Management"
+    },
+    {
+      "type": "Link",
+      "label": "ES Customer",
+      "link_type": "DocType",
+      "link_to": "ES Customer"
+    },
+    {
+      "type": "Link",
+      "label": "Installed Solar System",
+      "link_type": "DocType",
+      "link_to": "Installed Solar System"
+    },
+    {
+      "type": "Link",
+      "label": "Installed Equipment",
+      "link_type": "DocType",
+      "link_to": "Installed Equipment"
+    },
+    {
+      "type": "Card Break",
+      "label": "Equipment Catalog"
+    },
+    {
+      "type": "Link",
+      "label": "ES Item",
+      "link_type": "DocType",
+      "link_to": "ES Item"
+    },
+    {
+      "type": "Link",
+      "label": "EOLA Equipment Specification",
+      "link_type": "DocType",
+      "link_to": "EOLA Equipment Specification"
+    },
+    {
+      "type": "Card Break",
+      "label": "Telemetry Monitoring"
+    },
+    {
+      "type": "Link",
+      "label": "Telemetry",
+      "link_type": "DocType",
+      "link_to": "Telemetry"
+    },
+    {
+      "type": "Link",
+      "label": "Performance Baseline",
+      "link_type": "DocType",
+      "link_to": "Performance Baseline"
+    },
+    {
+      "type": "Card Break",
+      "label": "Performance & Alerts"
+    },
+    {
+      "type": "Link",
+      "label": "Performance Alert",
+      "link_type": "DocType",
+      "link_to": "Performance Alert"
+    },
+    {
+      "type": "Card Break",
+      "label": "AI-Assisted Maintenance"
+    },
+    {
+      "type": "Link",
+      "label": "AI Recommendation",
+      "link_type": "DocType",
+      "link_to": "AI Recommendation"
+    },
+    {
+      "type": "Card Break",
+      "label": "Service & Resolution"
+    },
+    {
+      "type": "Link",
+      "label": "ES Issue",
+      "link_type": "DocType",
+      "link_to": "ES Issue"
+    },
+    {
+      "type": "Link",
+      "label": "ES Maintenance Visit",
+      "link_type": "DocType",
+      "link_to": "ES Maintenance Visit"
+    }
+  ],
+  "shortcuts": [
+    {
+      "label": "EOLA Dashboard",
+      "type": "Page",
+      "link_to": "eola-dashboard",
+      "color": "Blue"
+    }
+  ],
+  "roles": [
+    {
+      "role": "EOLA Technician"
+    },
+    {
+      "role": "System Manager"
+    }
+  ]
+}

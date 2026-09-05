@@ -1,0 +1,97 @@
+{
+  "doctype": "DocType",
+  "name": "ES Maintenance Visit",
+  "module": "EOLA",
+  "engine": "InnoDB",
+  "istable": 0,
+  "editable_grid": 1,
+  "track_changes": 1,
+  "field_order": [
+    "visit_name",
+    "issue",
+    "installed_solar_system",
+    "scheduled_date",
+    "completed_date",
+    "technician",
+    "status",
+    "work_performed"
+  ],
+  "fields": [
+    {
+      "label": "Visit Name",
+      "fieldname": "visit_name",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "label": "Issue",
+      "fieldname": "issue",
+      "fieldtype": "Link",
+      "options": "ES Issue",
+      "reqd": 1
+    },
+    {
+      "label": "Installed Solar System",
+      "fieldname": "installed_solar_system",
+      "fieldtype": "Link",
+      "options": "Installed Solar System",
+      "reqd": 1
+    },
+    {
+      "label": "Scheduled Date",
+      "fieldname": "scheduled_date",
+      "fieldtype": "Date",
+      "reqd": 1
+    },
+    {
+      "label": "Completed Date",
+      "fieldname": "completed_date",
+      "fieldtype": "Date"
+    },
+    {
+      "label": "Technician",
+      "fieldname": "technician",
+      "fieldtype": "Link",
+      "options": "User"
+    },
+    {
+      "label": "Status",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "options": "Scheduled\nIn Progress\nCompleted\nCancelled",
+      "default": "Scheduled"
+    },
+    {
+      "label": "Work Performed",
+      "fieldname": "work_performed",
+      "fieldtype": "Long Text"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "share": 1
+    },
+    {
+      "role": "EOLA Technician",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "report": 1,
+      "print": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "autoname": "ES-MV-.#####",
+  "title_field": "visit_name",
+  "show_title_field_in_link": 1
+}

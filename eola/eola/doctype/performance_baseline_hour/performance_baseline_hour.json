@@ -1,0 +1,54 @@
+{
+  "doctype": "DocType",
+  "name": "Performance Baseline Hour",
+  "module": "EOLA",
+  "engine": "InnoDB",
+  "istable": 1,
+  "editable_grid": 1,
+  "track_changes": 0,
+  "field_order": [
+    "hour",
+    "expected_power",
+    "minimum_expected_power",
+    "maximum_expected_power",
+    "expected_energy"
+  ],
+  "fields": [
+    {
+      "label": "Hour",
+      "fieldname": "hour",
+      "fieldtype": "Time",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "label": "Expected Power",
+      "fieldname": "expected_power",
+      "fieldtype": "Float",
+      "description": "kW",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "label": "Minimum Expected Power",
+      "fieldname": "minimum_expected_power",
+      "fieldtype": "Float",
+      "description": "kW"
+    },
+    {
+      "label": "Maximum Expected Power",
+      "fieldname": "maximum_expected_power",
+      "fieldtype": "Float",
+      "description": "kW"
+    },
+    {
+      "label": "Expected Energy",
+      "fieldname": "expected_energy",
+      "fieldtype": "Float",
+      "description": "kWh"
+    }
+  ],
+  "permissions": [],
+  "sort_field": "modified",
+  "sort_order": "DESC"
+}

@@ -1,0 +1,197 @@
+{
+  "doctype": "DocType",
+  "name": "Performance Alert",
+  "module": "EOLA",
+  "engine": "InnoDB",
+  "istable": 0,
+  "editable_grid": 1,
+  "track_changes": 1,
+  "field_order": [
+    "alert_name",
+    "telemetry",
+    "customer",
+    "installed_solar_system",
+    "equipment",
+    "alert_date",
+    "alert_type",
+    "severity",
+    "start_time",
+    "end_time",
+    "duration",
+    "expected_performance",
+    "actual_performance",
+    "deviation",
+    "detection_rule",
+    "evidence_summary",
+    "telemetry_chart",
+    "status",
+    "ai_recommendation",
+    "technician_decision",
+    "technician_remarks",
+    "resolution_issue"
+  ],
+  "fields": [
+    {
+      "label": "Alert Name",
+      "fieldname": "alert_name",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "label": "Telemetry",
+      "fieldname": "telemetry",
+      "fieldtype": "Link",
+      "options": "Telemetry",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "label": "Customer",
+      "fieldname": "customer",
+      "fieldtype": "Link",
+      "options": "ES Customer"
+    },
+    {
+      "label": "Installed Solar System",
+      "fieldname": "installed_solar_system",
+      "fieldtype": "Link",
+      "options": "Installed Solar System",
+      "reqd": 1
+    },
+    {
+      "label": "Equipment",
+      "fieldname": "equipment",
+      "fieldtype": "Link",
+      "options": "Installed Equipment"
+    },
+    {
+      "label": "Alert Date",
+      "fieldname": "alert_date",
+      "fieldtype": "Date",
+      "reqd": 1
+    },
+    {
+      "label": "Alert Type",
+      "fieldname": "alert_type",
+      "fieldtype": "Select",
+      "options": "Underperformance\nOvervoltage\nUndervoltage\nOvercurrent\nOvertemperature\nInverter Fault\nCommunication Loss\nUnexpected Shutdown\nPerformance Degradation",
+      "default": "Underperformance"
+    },
+    {
+      "label": "Severity",
+      "fieldname": "severity",
+      "fieldtype": "Select",
+      "options": "Warning\nCritical"
+    },
+    {
+      "label": "Start Time",
+      "fieldname": "start_time",
+      "fieldtype": "Time"
+    },
+    {
+      "label": "End Time",
+      "fieldname": "end_time",
+      "fieldtype": "Time"
+    },
+    {
+      "label": "Duration",
+      "fieldname": "duration",
+      "fieldtype": "Duration"
+    },
+    {
+      "label": "Expected Performance",
+      "fieldname": "expected_performance",
+      "fieldtype": "Float",
+      "description": "kW"
+    },
+    {
+      "label": "Actual Performance",
+      "fieldname": "actual_performance",
+      "fieldtype": "Float",
+      "description": "kW"
+    },
+    {
+      "label": "Deviation",
+      "fieldname": "deviation",
+      "fieldtype": "Percent"
+    },
+    {
+      "label": "Detection Rule",
+      "fieldname": "detection_rule",
+      "fieldtype": "Data"
+    },
+    {
+      "label": "Evidence Summary",
+      "fieldname": "evidence_summary",
+      "fieldtype": "Long Text"
+    },
+    {
+      "label": "Telemetry Chart",
+      "fieldname": "telemetry_chart",
+      "fieldtype": "HTML"
+    },
+    {
+      "label": "Status",
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "options": "New Alert\nUnder Review\nConfirmed\nDismissed\nResolved",
+      "default": "New Alert",
+      "read_only": 1
+    },
+    {
+      "label": "AI Recommendation",
+      "fieldname": "ai_recommendation",
+      "fieldtype": "Link",
+      "options": "AI Recommendation",
+      "read_only": 1
+    },
+    {
+      "label": "Technician Decision",
+      "fieldname": "technician_decision",
+      "fieldtype": "Select",
+      "options": "Pending\nAccept\nModify\nReject",
+      "default": "Pending",
+      "read_only": 1
+    },
+    {
+      "label": "Technician Remarks",
+      "fieldname": "technician_remarks",
+      "fieldtype": "Long Text",
+      "read_only": 1
+    },
+    {
+      "label": "Resolution Issue",
+      "fieldname": "resolution_issue",
+      "fieldtype": "Link",
+      "options": "ES Issue",
+      "read_only": 1
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "share": 1
+    },
+    {
+      "role": "EOLA Technician",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "report": 1,
+      "print": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "autoname": "EOLA-ALT-.#####",
+  "title_field": "alert_name",
+  "show_title_field_in_link": 1
+}

@@ -1,5 +1,5 @@
 app_name = "eola"
-app_title = "Eola"
+app_title = "EOLA"
 app_publisher = "AgilaSoft"
 app_description = "Eola app for Frappe"
 app_email = "eola@agilasoft.com"
@@ -256,3 +256,8 @@ app_license = "mit"
 # List of apps whose translatable strings should be excluded from this app's translations.
 # ignore_translatable_strings_from = []
 
+
+before_install = "eola.install.ensure_roles"
+before_migrate = "eola.install.ensure_roles"
+after_install = "eola.install.ensure_indexes"
+after_migrate = "eola.install.ensure_indexes"

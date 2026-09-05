@@ -1,0 +1,16 @@
+{
+  "doctype": "Page",
+  "name": "eola-dashboard",
+  "page_name": "eola-dashboard",
+  "title": "EOLA Dashboard",
+  "module": "EOLA",
+  "standard": "Yes",
+  "roles": [
+    {
+      "role": "System Manager"
+    },
+    {
+      "role": "EOLA Technician"
+    }
+  ]
+}

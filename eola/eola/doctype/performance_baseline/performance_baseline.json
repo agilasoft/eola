@@ -1,0 +1,105 @@
+{
+  "doctype": "DocType",
+  "name": "Performance Baseline",
+  "module": "EOLA",
+  "engine": "InnoDB",
+  "istable": 0,
+  "editable_grid": 1,
+  "track_changes": 1,
+  "field_order": [
+    "baseline_name",
+    "installed_solar_system",
+    "equipment",
+    "baseline_type",
+    "effective_from",
+    "effective_to",
+    "active",
+    "notes",
+    "hours"
+  ],
+  "fields": [
+    {
+      "label": "Baseline Name",
+      "fieldname": "baseline_name",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "label": "Installed Solar System",
+      "fieldname": "installed_solar_system",
+      "fieldtype": "Link",
+      "options": "Installed Solar System",
+      "reqd": 1
+    },
+    {
+      "label": "Equipment",
+      "fieldname": "equipment",
+      "fieldtype": "Link",
+      "options": "Installed Equipment"
+    },
+    {
+      "label": "Baseline Type",
+      "fieldname": "baseline_type",
+      "fieldtype": "Select",
+      "options": "Time of Day",
+      "default": "Time of Day",
+      "reqd": 1
+    },
+    {
+      "label": "Effective From",
+      "fieldname": "effective_from",
+      "fieldtype": "Date",
+      "reqd": 1
+    },
+    {
+      "label": "Effective To",
+      "fieldname": "effective_to",
+      "fieldtype": "Date"
+    },
+    {
+      "label": "Active",
+      "fieldname": "active",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "label": "Notes",
+      "fieldname": "notes",
+      "fieldtype": "Small Text"
+    },
+    {
+      "label": "Hours",
+      "fieldname": "hours",
+      "fieldtype": "Table",
+      "options": "Performance Baseline Hour",
+      "reqd": 1
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "share": 1
+    },
+    {
+      "role": "EOLA Technician",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "report": 1,
+      "print": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "autoname": "EOLA-BASE-.#####",
+  "title_field": "baseline_name",
+  "show_title_field_in_link": 1
+}

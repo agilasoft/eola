@@ -1,0 +1,66 @@
+{
+  "doctype": "DocType",
+  "name": "Telemetry Equipment",
+  "module": "EOLA",
+  "engine": "InnoDB",
+  "istable": 1,
+  "editable_grid": 1,
+  "track_changes": 0,
+  "field_order": [
+    "installed_equipment",
+    "equipment_type",
+    "item",
+    "manufacturer",
+    "model",
+    "serial_number"
+  ],
+  "fields": [
+    {
+      "label": "Installed Equipment",
+      "fieldname": "installed_equipment",
+      "fieldtype": "Link",
+      "options": "Installed Equipment",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "label": "Equipment Type",
+      "fieldname": "equipment_type",
+      "fieldtype": "Data",
+      "fetch_from": "installed_equipment.equipment_type",
+      "read_only": 1
+    },
+    {
+      "label": "Item",
+      "fieldname": "item",
+      "fieldtype": "Link",
+      "options": "ES Item",
+      "fetch_from": "installed_equipment.item",
+      "read_only": 1
+    },
+    {
+      "label": "Manufacturer",
+      "fieldname": "manufacturer",
+      "fieldtype": "Data",
+      "fetch_from": "installed_equipment.manufacturer",
+      "read_only": 1
+    },
+    {
+      "label": "Model",
+      "fieldname": "model",
+      "fieldtype": "Data",
+      "fetch_from": "installed_equipment.model",
+      "read_only": 1
+    },
+    {
+      "label": "Serial Number",
+      "fieldname": "serial_number",
+      "fieldtype": "Data",
+      "fetch_from": "installed_equipment.serial_number",
+      "read_only": 1
+    }
+  ],
+  "permissions": [],
+  "sort_field": "modified",
+  "sort_order": "DESC"
+}

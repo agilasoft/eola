@@ -1,0 +1,203 @@
+{
+  "doctype": "DocType",
+  "name": "Telemetry",
+  "module": "EOLA",
+  "engine": "InnoDB",
+  "istable": 0,
+  "editable_grid": 1,
+  "track_changes": 1,
+  "field_order": [
+    "display_name",
+    "customer",
+    "installed_solar_system",
+    "telemetry_date",
+    "data_source",
+    "monitoring_device",
+    "reading_interval",
+    "reading_count",
+    "analysis_status",
+    "performance_status",
+    "daily_energy_production",
+    "expected_daily_energy",
+    "performance_deviation",
+    "maximum_output",
+    "average_daytime_output",
+    "anomaly_detected",
+    "performance_alert",
+    "analysis_summary",
+    "notes",
+    "equipment",
+    "readings"
+  ],
+  "fields": [
+    {
+      "label": "Display Name",
+      "fieldname": "display_name",
+      "fieldtype": "Data",
+      "read_only": 1
+    },
+    {
+      "label": "Customer",
+      "fieldname": "customer",
+      "fieldtype": "Link",
+      "options": "ES Customer",
+      "fetch_from": "installed_solar_system.customer",
+      "read_only": 1
+    },
+    {
+      "label": "Installed Solar System",
+      "fieldname": "installed_solar_system",
+      "fieldtype": "Link",
+      "options": "Installed Solar System",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "label": "Telemetry Date",
+      "fieldname": "telemetry_date",
+      "fieldtype": "Date",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "label": "Data Source",
+      "fieldname": "data_source",
+      "fieldtype": "Select",
+      "options": "Simulated\nAPI\nManual\nImport",
+      "default": "Manual"
+    },
+    {
+      "label": "Monitoring Device",
+      "fieldname": "monitoring_device",
+      "fieldtype": "Link",
+      "options": "Installed Equipment"
+    },
+    {
+      "label": "Reading Interval",
+      "fieldname": "reading_interval",
+      "fieldtype": "Select",
+      "options": "1 Hour\n15 Minutes\nOther",
+      "default": "1 Hour",
+      "reqd": 1
+    },
+    {
+      "label": "Reading Count",
+      "fieldname": "reading_count",
+      "fieldtype": "Int",
+      "read_only": 1
+    },
+    {
+      "label": "Analysis Status",
+      "fieldname": "analysis_status",
+      "fieldtype": "Select",
+      "options": "Pending\nAnalyzing\nAnalyzed\nError",
+      "default": "Pending",
+      "read_only": 1
+    },
+    {
+      "label": "Performance Status",
+      "fieldname": "performance_status",
+      "fieldtype": "Select",
+      "options": "Normal\nWarning\nCritical\nNot Analyzed",
+      "default": "Not Analyzed",
+      "read_only": 1
+    },
+    {
+      "label": "Daily Energy Production",
+      "fieldname": "daily_energy_production",
+      "fieldtype": "Float",
+      "description": "kWh",
+      "read_only": 1
+    },
+    {
+      "label": "Expected Daily Energy",
+      "fieldname": "expected_daily_energy",
+      "fieldtype": "Float",
+      "description": "kWh",
+      "read_only": 1
+    },
+    {
+      "label": "Performance Deviation",
+      "fieldname": "performance_deviation",
+      "fieldtype": "Percent",
+      "read_only": 1
+    },
+    {
+      "label": "Maximum Output",
+      "fieldname": "maximum_output",
+      "fieldtype": "Float",
+      "description": "kW",
+      "read_only": 1
+    },
+    {
+      "label": "Average Daytime Output",
+      "fieldname": "average_daytime_output",
+      "fieldtype": "Float",
+      "description": "kW",
+      "read_only": 1
+    },
+    {
+      "label": "Anomaly Detected",
+      "fieldname": "anomaly_detected",
+      "fieldtype": "Check",
+      "read_only": 1
+    },
+    {
+      "label": "Performance Alert",
+      "fieldname": "performance_alert",
+      "fieldtype": "Link",
+      "options": "Performance Alert",
+      "read_only": 1
+    },
+    {
+      "label": "Analysis Summary",
+      "fieldname": "analysis_summary",
+      "fieldtype": "Long Text",
+      "read_only": 1
+    },
+    {
+      "label": "Notes",
+      "fieldname": "notes",
+      "fieldtype": "Small Text"
+    },
+    {
+      "label": "Equipment",
+      "fieldname": "equipment",
+      "fieldtype": "Table",
+      "options": "Telemetry Equipment"
+    },
+    {
+      "label": "Readings",
+      "fieldname": "readings",
+      "fieldtype": "Table",
+      "options": "Hourly Telemetry Reading",
+      "reqd": 1
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "share": 1
+    },
+    {
+      "role": "EOLA Technician",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "report": 1,
+      "print": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "autoname": "EOLA-TEL-.#####",
+  "title_field": "display_name",
+  "show_title_field_in_link": 1
+}

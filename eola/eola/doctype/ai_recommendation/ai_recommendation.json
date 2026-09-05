@@ -1,0 +1,168 @@
+{
+  "doctype": "DocType",
+  "name": "AI Recommendation",
+  "module": "EOLA",
+  "engine": "InnoDB",
+  "istable": 0,
+  "editable_grid": 1,
+  "track_changes": 1,
+  "field_order": [
+    "recommendation_name",
+    "performance_alert",
+    "generated_on",
+    "ai_model",
+    "prompt_version",
+    "input_summary",
+    "finding",
+    "possible_causes",
+    "recommended_action",
+    "recommended_type_of_service",
+    "supporting_evidence",
+    "confidence",
+    "ai_disclaimer",
+    "technician_decision",
+    "technician_modification",
+    "technician_remarks",
+    "reviewed_by",
+    "reviewed_on"
+  ],
+  "fields": [
+    {
+      "label": "Recommendation Name",
+      "fieldname": "recommendation_name",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "label": "Performance Alert",
+      "fieldname": "performance_alert",
+      "fieldtype": "Link",
+      "options": "Performance Alert",
+      "reqd": 1
+    },
+    {
+      "label": "Generated On",
+      "fieldname": "generated_on",
+      "fieldtype": "Datetime",
+      "reqd": 1
+    },
+    {
+      "label": "AI Model",
+      "fieldname": "ai_model",
+      "fieldtype": "Data",
+      "reqd": 1
+    },
+    {
+      "label": "Prompt Version",
+      "fieldname": "prompt_version",
+      "fieldtype": "Data",
+      "reqd": 1
+    },
+    {
+      "label": "Input Summary",
+      "fieldname": "input_summary",
+      "fieldtype": "Long Text",
+      "reqd": 1
+    },
+    {
+      "label": "Finding",
+      "fieldname": "finding",
+      "fieldtype": "Long Text",
+      "reqd": 1
+    },
+    {
+      "label": "Possible Causes",
+      "fieldname": "possible_causes",
+      "fieldtype": "Long Text"
+    },
+    {
+      "label": "Recommended Action",
+      "fieldname": "recommended_action",
+      "fieldtype": "Long Text",
+      "reqd": 1
+    },
+    {
+      "label": "Recommended Type of Service",
+      "fieldname": "recommended_type_of_service",
+      "fieldtype": "Select",
+      "options": "Remote Work\nSite Service",
+      "reqd": 1
+    },
+    {
+      "label": "Supporting Evidence",
+      "fieldname": "supporting_evidence",
+      "fieldtype": "Long Text"
+    },
+    {
+      "label": "Confidence",
+      "fieldname": "confidence",
+      "fieldtype": "Percent"
+    },
+    {
+      "label": "AI Disclaimer",
+      "fieldname": "ai_disclaimer",
+      "fieldtype": "Small Text",
+      "default": "AI suggestions require technician review and do not establish a diagnosis."
+    },
+    {
+      "label": "Technician Decision",
+      "fieldname": "technician_decision",
+      "fieldtype": "Select",
+      "options": "Pending\nAccept\nModify\nReject",
+      "default": "Pending",
+      "read_only": 1
+    },
+    {
+      "label": "Technician Modification",
+      "fieldname": "technician_modification",
+      "fieldtype": "Long Text",
+      "read_only": 1
+    },
+    {
+      "label": "Technician Remarks",
+      "fieldname": "technician_remarks",
+      "fieldtype": "Long Text",
+      "read_only": 1
+    },
+    {
+      "label": "Reviewed By",
+      "fieldname": "reviewed_by",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "label": "Reviewed On",
+      "fieldname": "reviewed_on",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "share": 1
+    },
+    {
+      "role": "EOLA Technician",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "report": 1,
+      "print": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "autoname": "EOLA-AI-.#####",
+  "title_field": "recommendation_name",
+  "show_title_field_in_link": 1
+}

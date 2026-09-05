@@ -1,0 +1,309 @@
+{
+  "doctype": "DocType",
+  "name": "EOLA Equipment Specification",
+  "module": "EOLA",
+  "engine": "InnoDB",
+  "istable": 0,
+  "editable_grid": 1,
+  "track_changes": 1,
+  "field_order": [
+    "specification_name",
+    "item",
+    "equipment_type",
+    "manufacturer",
+    "model",
+    "datasheet_reference",
+    "active",
+    "notes",
+    "pv_module_specifications",
+    "rated_power",
+    "module_efficiency",
+    "voc",
+    "vmp",
+    "isc",
+    "imp",
+    "max_system_voltage",
+    "power_temperature_coefficient",
+    "inverter_specifications",
+    "rated_ac_output",
+    "maximum_ac_output",
+    "maximum_dc_input",
+    "maximum_dc_voltage",
+    "mppt_minimum_voltage",
+    "mppt_maximum_voltage",
+    "maximum_input_current",
+    "number_of_mppts",
+    "rated_output_voltage",
+    "maximum_efficiency",
+    "battery_specifications",
+    "nominal_capacity",
+    "nominal_voltage",
+    "maximum_charge_power",
+    "maximum_discharge_power",
+    "maximum_charge_current",
+    "maximum_discharge_current",
+    "round_trip_efficiency",
+    "operating_conditions",
+    "operating_temperature_min",
+    "operating_temperature_max"
+  ],
+  "fields": [
+    {
+      "label": "Specification Name",
+      "fieldname": "specification_name",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "label": "Item",
+      "fieldname": "item",
+      "fieldtype": "Link",
+      "options": "ES Item",
+      "reqd": 1
+    },
+    {
+      "label": "Equipment Type",
+      "fieldname": "equipment_type",
+      "fieldtype": "Select",
+      "options": "PV Module\nInverter\nBattery\nMeter\nSensor\nOther",
+      "reqd": 1
+    },
+    {
+      "label": "Manufacturer",
+      "fieldname": "manufacturer",
+      "fieldtype": "Data"
+    },
+    {
+      "label": "Model",
+      "fieldname": "model",
+      "fieldtype": "Data"
+    },
+    {
+      "label": "Datasheet Reference",
+      "fieldname": "datasheet_reference",
+      "fieldtype": "Data"
+    },
+    {
+      "label": "Active",
+      "fieldname": "active",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "label": "Notes",
+      "fieldname": "notes",
+      "fieldtype": "Small Text"
+    },
+    {
+      "label": "PV Module Specifications",
+      "fieldname": "pv_module_specifications",
+      "fieldtype": "Section Break",
+      "depends_on": "eval:doc.equipment_type==='PV Module'",
+      "description": ""
+    },
+    {
+      "label": "Rated Power",
+      "fieldname": "rated_power",
+      "fieldtype": "Float",
+      "description": "Wp"
+    },
+    {
+      "label": "Module Efficiency",
+      "fieldname": "module_efficiency",
+      "fieldtype": "Percent"
+    },
+    {
+      "label": "Voc",
+      "fieldname": "voc",
+      "fieldtype": "Float",
+      "description": "V"
+    },
+    {
+      "label": "Vmp",
+      "fieldname": "vmp",
+      "fieldtype": "Float",
+      "description": "V"
+    },
+    {
+      "label": "Isc",
+      "fieldname": "isc",
+      "fieldtype": "Float",
+      "description": "A"
+    },
+    {
+      "label": "Imp",
+      "fieldname": "imp",
+      "fieldtype": "Float",
+      "description": "A"
+    },
+    {
+      "label": "Max System Voltage",
+      "fieldname": "max_system_voltage",
+      "fieldtype": "Float",
+      "description": "V"
+    },
+    {
+      "label": "Power Temperature Coefficient",
+      "fieldname": "power_temperature_coefficient",
+      "fieldtype": "Float",
+      "description": "%/\u00b0C"
+    },
+    {
+      "label": "Inverter Specifications",
+      "fieldname": "inverter_specifications",
+      "fieldtype": "Section Break",
+      "depends_on": "eval:doc.equipment_type==='Inverter'",
+      "description": ""
+    },
+    {
+      "label": "Rated AC Output",
+      "fieldname": "rated_ac_output",
+      "fieldtype": "Float",
+      "description": "kW"
+    },
+    {
+      "label": "Maximum AC Output",
+      "fieldname": "maximum_ac_output",
+      "fieldtype": "Float",
+      "description": "kW"
+    },
+    {
+      "label": "Maximum DC Input",
+      "fieldname": "maximum_dc_input",
+      "fieldtype": "Float",
+      "description": "kW"
+    },
+    {
+      "label": "Maximum DC Voltage",
+      "fieldname": "maximum_dc_voltage",
+      "fieldtype": "Float",
+      "description": "V"
+    },
+    {
+      "label": "MPPT Minimum Voltage",
+      "fieldname": "mppt_minimum_voltage",
+      "fieldtype": "Float",
+      "description": "V"
+    },
+    {
+      "label": "MPPT Maximum Voltage",
+      "fieldname": "mppt_maximum_voltage",
+      "fieldtype": "Float",
+      "description": "V"
+    },
+    {
+      "label": "Maximum Input Current",
+      "fieldname": "maximum_input_current",
+      "fieldtype": "Float",
+      "description": "A"
+    },
+    {
+      "label": "Number of MPPTs",
+      "fieldname": "number_of_mppts",
+      "fieldtype": "Int"
+    },
+    {
+      "label": "Rated Output Voltage",
+      "fieldname": "rated_output_voltage",
+      "fieldtype": "Float",
+      "description": "V"
+    },
+    {
+      "label": "Maximum Efficiency",
+      "fieldname": "maximum_efficiency",
+      "fieldtype": "Percent"
+    },
+    {
+      "label": "Battery Specifications",
+      "fieldname": "battery_specifications",
+      "fieldtype": "Section Break",
+      "depends_on": "eval:doc.equipment_type==='Battery'",
+      "description": "Battery analysis is future scope."
+    },
+    {
+      "label": "Nominal Capacity",
+      "fieldname": "nominal_capacity",
+      "fieldtype": "Float",
+      "description": "kWh"
+    },
+    {
+      "label": "Nominal Voltage",
+      "fieldname": "nominal_voltage",
+      "fieldtype": "Float",
+      "description": "V"
+    },
+    {
+      "label": "Maximum Charge Power",
+      "fieldname": "maximum_charge_power",
+      "fieldtype": "Float",
+      "description": "kW"
+    },
+    {
+      "label": "Maximum Discharge Power",
+      "fieldname": "maximum_discharge_power",
+      "fieldtype": "Float",
+      "description": "kW"
+    },
+    {
+      "label": "Maximum Charge Current",
+      "fieldname": "maximum_charge_current",
+      "fieldtype": "Float",
+      "description": "A"
+    },
+    {
+      "label": "Maximum Discharge Current",
+      "fieldname": "maximum_discharge_current",
+      "fieldtype": "Float",
+      "description": "A"
+    },
+    {
+      "label": "Round Trip Efficiency",
+      "fieldname": "round_trip_efficiency",
+      "fieldtype": "Percent"
+    },
+    {
+      "label": "Operating Conditions",
+      "fieldname": "operating_conditions",
+      "fieldtype": "Section Break"
+    },
+    {
+      "label": "Operating Temperature Min",
+      "fieldname": "operating_temperature_min",
+      "fieldtype": "Float",
+      "description": "\u00b0C"
+    },
+    {
+      "label": "Operating Temperature Max",
+      "fieldname": "operating_temperature_max",
+      "fieldtype": "Float",
+      "description": "\u00b0C"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "share": 1
+    },
+    {
+      "role": "EOLA Technician",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "report": 1,
+      "print": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "autoname": "EOLA-SPEC-.#####",
+  "title_field": "specification_name",
+  "show_title_field_in_link": 1
+}
