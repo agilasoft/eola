@@ -1,0 +1,72 @@
+{
+  "doctype": "DocType",
+  "name": "AI Recommendation Reading",
+  "module": "EOLA",
+  "engine": "InnoDB",
+  "istable": 1,
+  "editable_grid": 1,
+  "field_order": [
+    "telemetry",
+    "telemetry_date",
+    "reading_time",
+    "ac_power",
+    "expected_power",
+    "power_deviation",
+    "reading_status"
+  ],
+  "fields": [
+    {
+      "fieldname": "telemetry",
+      "label": "Telemetry",
+      "fieldtype": "Link",
+      "read_only": 1,
+      "in_list_view": 1,
+      "options": "Telemetry"
+    },
+    {
+      "fieldname": "telemetry_date",
+      "label": "Date",
+      "fieldtype": "Date",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "reading_time",
+      "label": "Time",
+      "fieldtype": "Time",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "ac_power",
+      "label": "Actual Power (kW)",
+      "fieldtype": "Float",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "expected_power",
+      "label": "Expected Power (kW)",
+      "fieldtype": "Float",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "power_deviation",
+      "label": "Deviation (%)",
+      "fieldtype": "Percent",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "reading_status",
+      "label": "Tag",
+      "fieldtype": "Data",
+      "read_only": 1,
+      "in_list_view": 1
+    }
+  ],
+  "permissions": [],
+  "sort_field": "modified",
+  "sort_order": "DESC"
+}

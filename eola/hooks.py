@@ -5,6 +5,8 @@ app_description = "Eola app for Frappe"
 app_email = "eola@agilasoft.com"
 app_license = "mit"
 
+eola_ai_provider = "eola.openai_provider.generate_recommendation"
+
 # Apps
 # ------------------
 

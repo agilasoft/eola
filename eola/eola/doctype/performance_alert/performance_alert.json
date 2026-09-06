@@ -26,9 +26,11 @@
     "telemetry_chart",
     "status",
     "ai_recommendation",
+    "ai_recommendation_text",
     "technician_decision",
     "technician_remarks",
-    "resolution_issue"
+    "resolution_issue",
+    "alert_tags"
   ],
   "fields": [
     {
@@ -75,7 +77,7 @@
       "label": "Alert Type",
       "fieldname": "alert_type",
       "fieldtype": "Select",
-      "options": "Underperformance\nOvervoltage\nUndervoltage\nOvercurrent\nOvertemperature\nInverter Fault\nCommunication Loss\nUnexpected Shutdown\nPerformance Degradation",
+      "options": "Underperformance\nOvervoltage\nUndervoltage\nOvercurrent\nOvertemperature\nInverter Fault\nCommunication Loss\nUnexpected Shutdown\nPerformance Degradation\nCapacity Shortfall\nUnexpected Zero Generation\nMissing Telemetry / Communication Loss\nAbnormal Voltage",
       "default": "Underperformance"
     },
     {
@@ -137,13 +139,20 @@
       "fieldtype": "Select",
       "options": "New Alert\nUnder Review\nConfirmed\nDismissed\nResolved",
       "default": "New Alert",
-      "read_only": 1
+      "read_only": 1,
+      "description": "Confirmed means technician-approved with service pending, not resolved. Resolved is synchronized only when the linked ES Issue is resolved or closed."
     },
     {
-      "label": "AI Recommendation",
+      "label": "AI Recommendation Record",
       "fieldname": "ai_recommendation",
       "fieldtype": "Link",
       "options": "AI Recommendation",
+      "read_only": 1
+    },
+    {
+      "fieldname": "ai_recommendation_text",
+      "label": "AI Recommendation",
+      "fieldtype": "Long Text",
       "read_only": 1
     },
     {
@@ -165,6 +174,12 @@
       "fieldname": "resolution_issue",
       "fieldtype": "Link",
       "options": "ES Issue",
+      "read_only": 1
+    },
+    {
+      "fieldname": "alert_tags",
+      "label": "Detected Alert Types",
+      "fieldtype": "Small Text",
       "read_only": 1
     }
   ],

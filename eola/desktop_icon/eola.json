@@ -1,0 +1,14 @@
+{
+ "doctype": "Desktop Icon",
+ "name": "Eola",
+ "label": "Eola",
+ "app": "eola",
+ "standard": 1,
+ "icon_type": "Link",
+ "link_type": "Workspace Sidebar",
+ "link_to": "Eola",
+ "icon": "energy",
+ "bg_color": "blue",
+ "hidden": 0,
+ "roles": []
+}

@@ -1,0 +1,359 @@
+{
+  "doctype": "DocType",
+  "name": "Customer Lead",
+  "module": "EOLA",
+  "istable": 0,
+  "engine": "InnoDB",
+  "autoname": "EOLA-LEAD-.#####",
+  "title_field": "first_name",
+  "show_title_field_in_link": 1,
+  "track_changes": 1,
+  "field_order": [
+    "contact_section",
+    "first_name",
+    "last_name",
+    "phone",
+    "email",
+    "country",
+    "full_address",
+    "property_section",
+    "property_type",
+    "ownership_status",
+    "roof_type",
+    "roof_shading",
+    "roof_age",
+    "roof_area",
+    "energy_section",
+    "monthly_bill",
+    "electricity_provider",
+    "allocated_budget",
+    "desired_reduction",
+    "electricity_rate",
+    "reduce_costs",
+    "environment",
+    "independence",
+    "property_value",
+    "other_reason",
+    "reason_details",
+    "grid_connection",
+    "backup_required",
+    "installation_timeline",
+    "comments",
+    "consent_section",
+    "marketing_consent",
+    "processing_consent",
+    "consent_timestamp",
+    "consent_version",
+    "result_section",
+    "lead_status",
+    "recommendation_status",
+    "system_type",
+    "recommended_equipment",
+    "recommendation_json",
+    "ai_response",
+    "ai_model",
+    "submission_id",
+    "equipment_initialized"
+  ],
+  "fields": [
+    {
+      "fieldname": "contact_section",
+      "label": "Contact details",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "first_name",
+      "label": "First name",
+      "fieldtype": "Data",
+      "reqd": 1
+    },
+    {
+      "fieldname": "last_name",
+      "label": "Last name",
+      "fieldtype": "Data",
+      "reqd": 1
+    },
+    {
+      "fieldname": "phone",
+      "label": "Phone number",
+      "fieldtype": "Data",
+      "reqd": 1
+    },
+    {
+      "fieldname": "email",
+      "label": "Email",
+      "fieldtype": "Data",
+      "reqd": 1
+    },
+    {
+      "fieldname": "country",
+      "label": "Country",
+      "fieldtype": "Link",
+      "options": "Country",
+      "reqd": 1,
+      "default": "Philippines"
+    },
+    {
+      "fieldname": "full_address",
+      "label": "Full address",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "property_section",
+      "label": "Property details",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "property_type",
+      "label": "Property type",
+      "fieldtype": "Select",
+      "options": "Residential\nCommercial\nIndustrial\nAgricultural\nOther",
+      "reqd": 1
+    },
+    {
+      "fieldname": "ownership_status",
+      "label": "Ownership status",
+      "fieldtype": "Select",
+      "options": "\nOwner\nTenant\nOther",
+      "reqd": 0
+    },
+    {
+      "fieldname": "roof_type",
+      "label": "Roof type",
+      "fieldtype": "Select",
+      "options": "\nMetal\nTile\nConcrete\nAsphalt shingle\nOther\nNot sure",
+      "reqd": 0
+    },
+    {
+      "fieldname": "roof_shading",
+      "label": "Shading on roof",
+      "fieldtype": "Select",
+      "options": "\nNone\nLight\nModerate\nHeavy\nNot sure",
+      "reqd": 0
+    },
+    {
+      "fieldname": "roof_age",
+      "label": "Roof age (approximate years)",
+      "fieldtype": "Float",
+      "non_negative": 1
+    },
+    {
+      "fieldname": "energy_section",
+      "label": "Energy goals and budget",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "monthly_bill",
+      "label": "Average monthly electricity bill (PHP)",
+      "fieldtype": "Currency",
+      "reqd": 1,
+      "options": "PHP"
+    },
+    {
+      "fieldname": "electricity_provider",
+      "label": "Current electricity provider",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "allocated_budget",
+      "label": "Allocated budget (PHP)",
+      "fieldtype": "Currency",
+      "reqd": 1,
+      "options": "PHP"
+    },
+    {
+      "fieldname": "desired_reduction",
+      "label": "Desired bill reduction (%)",
+      "fieldtype": "Percent",
+      "reqd": 1
+    },
+    {
+      "fieldname": "electricity_rate",
+      "label": "Electricity rate (PHP/kWh)",
+      "fieldtype": "Float",
+      "reqd": 1,
+      "default": "12",
+      "description": "Planning assumption. Replace with your actual per-kWh rate."
+    },
+    {
+      "fieldname": "reduce_costs",
+      "label": "Reduce energy costs",
+      "fieldtype": "Check"
+    },
+    {
+      "fieldname": "environment",
+      "label": "Environmental concerns",
+      "fieldtype": "Check"
+    },
+    {
+      "fieldname": "independence",
+      "label": "Energy independence",
+      "fieldtype": "Check"
+    },
+    {
+      "fieldname": "property_value",
+      "label": "Increase property value",
+      "fieldtype": "Check"
+    },
+    {
+      "fieldname": "other_reason",
+      "label": "Other",
+      "fieldtype": "Check"
+    },
+    {
+      "fieldname": "reason_details",
+      "label": "Other reason details",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "grid_connection",
+      "label": "Grid connection",
+      "fieldtype": "Select",
+      "options": "Connected\nNo grid connection",
+      "default": "Connected",
+      "reqd": 1
+    },
+    {
+      "fieldname": "backup_required",
+      "label": "Battery backup requested",
+      "fieldtype": "Check"
+    },
+    {
+      "fieldname": "installation_timeline",
+      "label": "Timeline for installation",
+      "fieldtype": "Select",
+      "options": "\nAs soon as possible\nWithin 3 months\n3–6 months\n6–12 months\nJust exploring"
+    },
+    {
+      "fieldname": "comments",
+      "label": "Additional comments or questions",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "consent_section",
+      "label": "Privacy and consent",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "marketing_consent",
+      "label": "I agree to receive other communications from EOLA.",
+      "fieldtype": "Check"
+    },
+    {
+      "fieldname": "processing_consent",
+      "label": "Consent to store and process this inquiry",
+      "fieldtype": "Check",
+      "reqd": 1
+    },
+    {
+      "fieldname": "consent_timestamp",
+      "label": "Consent recorded at",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "consent_version",
+      "label": "Consent version",
+      "fieldtype": "Data",
+      "read_only": 1
+    },
+    {
+      "fieldname": "result_section",
+      "label": "Solar recommendation",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "lead_status",
+      "label": "Lead status",
+      "fieldtype": "Select",
+      "options": "New\nContacted\nQualified\nConverted\nClosed",
+      "default": "New",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "recommendation_status",
+      "label": "Recommendation status",
+      "fieldtype": "Select",
+      "options": "Pending\nAI Generated\nEstimate Only",
+      "default": "Pending",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "recommendation_json",
+      "label": "Sizing and equipment snapshot",
+      "fieldtype": "Code",
+      "options": "JSON",
+      "read_only": 1
+    },
+    {
+      "fieldname": "ai_response",
+      "label": "Solar recommendation",
+      "fieldtype": "Long Text",
+      "read_only": 1
+    },
+    {
+      "fieldname": "ai_model",
+      "label": "AI model",
+      "fieldtype": "Data",
+      "read_only": 1
+    },
+    {
+      "fieldname": "submission_id",
+      "label": "Submission ID",
+      "fieldtype": "Data",
+      "unique": 1,
+      "read_only": 1,
+      "hidden": 1
+    },
+    {
+      "fieldname": "recommended_equipment",
+      "label": "Recommended equipment",
+      "fieldtype": "Table",
+      "options": "ES Quotation Item"
+    },
+    {
+      "fieldname": "equipment_initialized",
+      "label": "Equipment initialized",
+      "fieldtype": "Check",
+      "hidden": 1,
+      "read_only": 1
+    },
+    {
+      "fieldname": "system_type",
+      "label": "System Type",
+      "fieldtype": "Select",
+      "options": "\nGrid-Tied\nHybrid\nOff-Grid",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "roof_area",
+      "label": "Usable roof area (m²)",
+      "fieldtype": "Float",
+      "non_negative": 1,
+      "description": "Optional. Area available for solar panels after setbacks and obstructions."
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "report": 1,
+      "print": 1,
+      "delete": 1,
+      "export": 1
+    },
+    {
+      "role": "EOLA Technician",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "report": 1,
+      "print": 1
+    }
+  ],
+  "sort_field": "creation",
+  "sort_order": "DESC"
+}

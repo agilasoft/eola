@@ -4,6 +4,7 @@ import frappe
 from frappe.utils import getdate, now_datetime, nowdate
 
 from eola.analysis import analyze, hour_index
+from eola.recommendations import recommendation_text
 
 
 def writable(doctype, name):
@@ -35,7 +36,7 @@ def analyze_telemetry(name):
 	baseline = frappe.get_doc("Performance Baseline", baselines[0].name)
 	baseline.check_permission("read")
 	try:
-		result = analyze(doc.readings, baseline.hours, system.system_type)
+		result = analyze(doc.readings, baseline.hours, system.system_type, allow_missing=True)
 	except ValueError as exc:
 		frappe.throw(str(exc))
 	for row in doc.readings:
@@ -56,27 +57,53 @@ def analyze_telemetry(name):
 		rule="Hourly mean AC power: warning <= -15%; critical <= -30%; positive baseline hours only.",
 		interval="Each reading covers [hour, hour + 1). Disjoint affected hours are listed separately; duration is their sum.",
 		**result)
+	evidence["load_recorded"] = bool(doc.get("load_recorded"))
+	evidence["daily_load_kwh"] = doc.get("daily_load_energy") if doc.get("load_recorded") else None
+	evidence["appliance_changes"] = doc.get("appliance_changes")
 	doc.analysis_summary = json.dumps(evidence, indent=2)
-	if result["bad"]:
-		bad = result["bad"]
-		expected = sum(r["expected"] for r in bad) / len(bad)
-		actual = sum(r["actual"] for r in bad) / len(bad)
-		alert = frappe.get_doc(dict(doctype="Performance Alert", alert_name=f"Underperformance — {system.system_name} — {doc.telemetry_date}",
+	from eola.alert_types import classify
+	detected = classify(doc.readings, result, system.as_dict(), doc.get('load_recorded'), doc.get('daily_load_energy'))
+	for row in doc.readings:
+		hour = hour_index(row.reading_time)
+		if any(hour in detected['tags'].get(tag, []) for tag in ('Inverter Fault', 'Unexpected Zero Generation', 'Overtemperature', 'Abnormal Voltage')):
+			row.reading_status = 'Alert'
+		elif hour in detected['tags'].get('Missing Telemetry / Communication Loss', []):
+			row.reading_status = 'Warning'
+	doc.alert_tags = '\n'.join(detected['tags'])
+	doc.performance_status = detected['severity']
+	doc.anomaly_detected = bool(detected['primary'])
+	evidence['detected_alerts'] = detected
+	if result.get('missing_hours'):
+		evidence['data_quality'] = 'Incomplete day: energy is a partial observed total; missing hours are unknown, not zero. Full-day deviation is unavailable.'
+		doc.data_quality_note = evidence["data_quality"]
+		doc.performance_deviation = None
+		evidence['deviation'] = None
+	doc.analysis_summary = json.dumps(evidence, indent=2)
+	if detected['primary']:
+		kind = detected['primary']
+		hours = detected['tags'][kind]
+		affected = [r for r in result['rows'] if r['hour'] in hours and r['actual'] is not None]
+		expected = sum(r['expected'] for r in affected) / len(affected) if affected else 0
+		actual = sum(r['actual'] for r in affected) / len(affected) if affected else 0
+		if kind == 'Capacity Shortfall':
+			expected, actual = float(doc.daily_load_energy), result['daily_energy']
+		alert = frappe.get_doc(dict(doctype="Performance Alert", alert_name=f"{kind} — {system.system_name} — {doc.telemetry_date}",
 			telemetry=doc.name, customer=system.customer, installed_solar_system=system.name,
-			alert_date=doc.telemetry_date, alert_type="Underperformance", severity=result["status"],
-			start_time=f'{bad[0]["hour"]:02}:00:00', end_time=f'{(bad[-1]["hour"] + 1) % 24:02}:00:00',
-			duration=len(bad)*3600, expected_performance=expected, actual_performance=actual,
-			deviation=(actual-expected)/expected*100, detection_rule="EOLA-GRID-HOURLY-v1",
+			alert_date=doc.telemetry_date, alert_type=kind, severity=detected['severity'],
+			alert_tags=doc.alert_tags, start_time=f'{hours[0]:02}:00:00', end_time=f'{(hours[-1]+1)%24:02}:00:00',
+			duration=len(hours)*3600, expected_performance=expected, actual_performance=actual,
+			deviation=(actual-expected)/expected*100 if expected else 0, detection_rule=detected['rule'],
 			evidence_summary=doc.analysis_summary))
 		alert.flags.eola_analysis = True
 		alert.insert()
 		issue = frappe.get_doc(dict(doctype="ES Issue", subject=alert.alert_name, customer=system.customer,
-			status="New Alert", priority="High" if result["status"] == "Critical" else "Medium",
+			status="New Alert", priority="High" if detected["severity"] == "Critical" else "Medium",
 			description=doc.analysis_summary, telemetry=doc.name, performance_alert=alert.name,
 			installed_solar_system=system.name)).insert()
 		alert.resolution_issue = issue.name
 		alert.save()
 		doc.performance_alert = alert.name
+
 	doc.flags.eola_analysis = True
 	doc.save()
 	lock("Installed Solar System", system.name)
@@ -92,7 +119,8 @@ def recommendation_context(alert_name):
 	alert = frappe.get_doc("Performance Alert", alert_name)
 	alert.check_permission("read")
 	history = frappe.get_list("ES Issue", filters={"installed_solar_system": alert.installed_solar_system, "status": ["in", ["Resolved", "Closed"]]}, fields=["name", "subject", "resolution", "resolved_date", "service_type"], order_by="resolved_date desc", limit_page_length=20)
-	return {"alert": alert.name, "evidence": alert.evidence_summary, "service_history": history}
+	from eola.recommendations import stock_and_load_context
+	return {**stock_and_load_context(alert), "alert": alert.name, "evidence": alert.evidence_summary, "service_history": history, "output_instructions": "Explain the detected alert types, measurements, data gaps and configured thresholds in finding. Provide exactly five ranked possible_causes and five recommended_action entries as long text numbered 1. through 5. Use one short, concise sentence per reason and per action. Keep evidence details in supporting_evidence; identify causes as possibilities and propose concrete technician actions. All actions require technician approval."}
 
 
 @frappe.whitelist(methods=["POST"])
@@ -113,6 +141,7 @@ def review_recommendation(name, decision, modification=None, remarks=None):
 		frappe.throw("This recommendation has already been reviewed.")
 	if alert.status in ("Confirmed", "Resolved", "Dismissed"):
 		frappe.throw("This alert has already received a technician decision.")
+	lock("ES Issue", alert.resolution_issue)
 	issue = writable("ES Issue", alert.resolution_issue)
 	recommendation.technician_decision = decision
 	recommendation.technician_modification = modification if decision == "Modify" else None
@@ -121,14 +150,20 @@ def review_recommendation(name, decision, modification=None, remarks=None):
 	recommendation.reviewed_on = now_datetime()
 	recommendation.flags.eola_review = True
 	recommendation.save()
+	# Saving the recommendation synchronizes text and advances linked timestamps.
+	# Reload our locked records before applying the review decision.
+	alert.reload()
+	issue.reload()
 	alert.flags.eola_review = True
 	alert.ai_recommendation = recommendation.name
+	alert.ai_recommendation_text = recommendation_text(recommendation)
 	alert.technician_decision = decision
 	alert.technician_remarks = remarks
 	alert.status = "Dismissed" if decision == "Reject" else "Confirmed"
 	alert.save()
 	issue.flags.eola_review = True
 	issue.ai_recommendation = recommendation.name
+	issue.ai_recommendation_text = recommendation_text(recommendation)
 	issue.service_type = recommendation.recommended_type_of_service
 	issue.status = "Dismissed" if decision == "Reject" else "Confirmed"
 	issue.description = "\n\n".join([alert.evidence_summary or ""] + [f"{recommendation.meta.get_label(f)}:\n{recommendation.get(f) or ''}" for f in ("generated_on", "ai_model", "prompt_version", "input_summary", "finding", "possible_causes", "recommended_action", "recommended_type_of_service", "supporting_evidence", "confidence", "ai_disclaimer", "technician_decision", "technician_modification", "technician_remarks", "reviewed_by", "reviewed_on")])
@@ -140,10 +175,20 @@ def review_recommendation(name, decision, modification=None, remarks=None):
 def dashboard():
 	# get_list applies DocType and user permissions to every counter and card.
 	systems = frappe.get_list("Installed Solar System", filters={"monitoring_status": "Monitoring"}, pluck="name", limit_page_length=0)
-	alerts = frappe.get_list("Performance Alert", fields=["name", "alert_name", "severity", "deviation", "start_time", "end_time", "duration", "installed_solar_system", "alert_date", "status"], filters={"status": ["in", ["New Alert", "Under Review", "Confirmed"]]}, order_by="alert_date desc", limit_page_length=0)
+	alerts = frappe.get_list("Performance Alert", fields=["name", "alert_name", "severity", "deviation", "start_time", "end_time", "duration", "installed_solar_system", "alert_date", "status", "ai_recommendation", "resolution_issue"], filters={"status": ["in", ["New Alert", "Under Review", "Confirmed"]]}, order_by="alert_date desc", limit_page_length=0)
 	today_alerts = frappe.get_list("Performance Alert", filters={"alert_date": nowdate()}, pluck="name", limit_page_length=0)
-	cases = frappe.get_list("ES Issue", filters={"status": ["in", ["Confirmed", "In Progress", "On Hold"]]}, pluck="name", limit_page_length=0)
-	return dict(systems_monitored=len(systems), alerts_today=len(today_alerts), systems_needing_review=len({a.installed_solar_system for a in alerts if a.status in ("New Alert", "Under Review")}), maintenance_cases=len(cases), alerts=alerts[:50])
+	issues = frappe.get_list("ES Issue", fields=["name", "subject", "status", "priority", "performance_alert", "installed_solar_system", "service_type", "scheduled_date", "reschedule_reason", "resolved_date", "modified"], order_by="modified desc", limit_page_length=0) if frappe.has_permission("ES Issue", "read") else []
+	cases = [issue for issue in issues if issue.status in ("Confirmed", "Scheduled", "Re-scheduled", "In Progress", "On Hold")]
+	issues_by_name = {issue.name: issue for issue in issues}
+	visible_alerts = alerts[:50]
+	recommendation_names = [a.ai_recommendation for a in visible_alerts if a.ai_recommendation]
+	recommendations = frappe.get_list("AI Recommendation", filters={"name": ["in", recommendation_names]}, fields=["name", "finding", "possible_causes", "recommended_action", "technician_decision", "technician_modification", "ai_disclaimer"], limit_page_length=0) if recommendation_names and frappe.has_permission("AI Recommendation", "read") else []
+	by_name = {r.name: r for r in recommendations}
+	for alert in visible_alerts:
+		alert.issue = issues_by_name.get(alert.resolution_issue)
+		alert.recommendation = by_name.get(alert.ai_recommendation)
+		alert.can_review = bool(alert.recommendation and alert.recommendation.technician_decision == "Pending" and alert.status in ("New Alert", "Under Review") and frappe.has_permission("AI Recommendation", "write", doc=alert.ai_recommendation))
+	return dict(systems_monitored=len(systems), alerts_today=len(today_alerts), systems_needing_review=len({a.installed_solar_system for a in alerts if a.status in ("New Alert", "Under Review")}), maintenance_cases=len(cases), alerts=visible_alerts, issues=issues)
 
 
 @frappe.whitelist(methods=["POST"])
@@ -162,12 +207,14 @@ def generate_recommendation(alert_name):
 	output = frappe.get_attr(providers[0])(context)
 	if not isinstance(output, dict):
 		frappe.throw("The AI provider must return structured recommendation fields.")
-	required = ("ai_model", "prompt_version", "finding", "recommended_action", "recommended_type_of_service")
+	required = ("ai_model", "prompt_version", "finding", "possible_causes", "recommended_action", "recommended_type_of_service")
 	if any(not isinstance(output.get(key), str) or not output[key].strip() for key in required):
 		frappe.throw("The AI provider omitted required recommendation fields.")
 	if output["recommended_type_of_service"] not in ("Remote Work", "Site Service"):
 		frappe.throw("The AI provider returned an unsupported service type.")
-	allowed = (*required, "possible_causes", "supporting_evidence", "confidence")
+	from eola.recommendations import add_capacity_assessments
+	output = add_capacity_assessments(context, output)
+	allowed = (*required, "supporting_evidence", "confidence")
 	doc = frappe.get_doc(dict(doctype="AI Recommendation", recommendation_name=alert.alert_name,
 		performance_alert=alert.name, generated_on=now_datetime(), input_summary=json.dumps(context, default=str, indent=2),
 		**{key: output[key] for key in allowed if key in output})).insert()

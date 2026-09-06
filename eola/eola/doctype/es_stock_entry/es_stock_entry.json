@@ -1,0 +1,92 @@
+{
+  "doctype": "DocType",
+  "name": "ES Stock Entry",
+  "module": "Eola",
+  "engine": "InnoDB",
+  "autoname": "ES-STOCK-.#####",
+  "field_order": [
+    "posting_date",
+    "entry_type",
+    "item",
+    "quantity",
+    "notes",
+    "amended_from"
+  ],
+  "fields": [
+    {
+      "fieldname": "posting_date",
+      "label": "Posting Date",
+      "fieldtype": "Date",
+      "default": "Today",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "entry_type",
+      "label": "Entry Type",
+      "fieldtype": "Select",
+      "options": "Receipt\nIssue",
+      "default": "Receipt",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "item",
+      "label": "Item",
+      "fieldtype": "Link",
+      "options": "ES Item",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "quantity",
+      "label": "Quantity",
+      "fieldtype": "Float",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "notes",
+      "label": "Notes",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "amended_from",
+      "label": "Amended From",
+      "fieldtype": "Link",
+      "options": "ES Stock Entry",
+      "read_only": 1,
+      "no_copy": 1
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    },
+    {
+      "role": "EOLA Technician",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1
+    }
+  ],
+  "track_changes": 1,
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "is_submittable": 1
+}

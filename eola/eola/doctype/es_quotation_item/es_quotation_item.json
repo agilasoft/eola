@@ -1,0 +1,87 @@
+{
+  "doctype": "DocType",
+  "name": "ES Quotation Item",
+  "module": "EOLA",
+  "engine": "InnoDB",
+  "field_order": [
+    "item",
+    "equipment_type",
+    "description",
+    "manufacturer",
+    "model",
+    "quantity",
+    "uom",
+    "rate",
+    "amount",
+    "notes"
+  ],
+  "fields": [
+    {
+      "fieldname": "item",
+      "label": "Item",
+      "fieldtype": "Link",
+      "options": "ES Item",
+      "in_list_view": 1,
+      "reqd": 1
+    },
+    {
+      "fieldname": "equipment_type",
+      "label": "Equipment type",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "description",
+      "label": "Description",
+      "fieldtype": "Small Text",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "manufacturer",
+      "label": "Manufacturer",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "model",
+      "label": "Model",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "quantity",
+      "label": "Quantity",
+      "fieldtype": "Float",
+      "reqd": 1,
+      "default": "1",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "uom",
+      "label": "Unit",
+      "fieldtype": "Data",
+      "default": "Nos"
+    },
+    {
+      "fieldname": "rate",
+      "label": "Rate",
+      "fieldtype": "Currency",
+      "options": "PHP",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "amount",
+      "label": "Amount",
+      "fieldtype": "Currency",
+      "options": "PHP",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "notes",
+      "label": "Notes",
+      "fieldtype": "Small Text"
+    }
+  ],
+  "istable": 1,
+  "editable_grid": 1,
+  "permissions": []
+}

@@ -4,6 +4,7 @@ from frappe.model.document import Document
 from frappe.utils import getdate, nowdate
 
 from eola.analysis import hourly_map, power
+from eola.recommendations import recommendation_text, sync_recommendation, validate_top_five, populate_tagged_readings
 
 
 def same_system(equipment, system):
@@ -41,6 +42,11 @@ class PerformanceBaseline(Document):
 
 class Telemetry(Document):
 	def validate(self):
+		if self.get("load_recorded"):
+			try:
+				power(self.get("daily_load_energy"))
+			except ValueError as exc:
+				frappe.throw(str(exc))
 		previous = self.get_doc_before_save()
 		if previous and previous.analysis_status == "Analyzed" and not self.flags.eola_analysis:
 			frappe.throw("Analyzed telemetry is immutable to preserve its evidence trail.")
@@ -50,6 +56,7 @@ class Telemetry(Document):
 			self.performance_alert = None
 			self.anomaly_detected = 0
 			self.analysis_summary = None
+			self.alert_tags = None
 			for field in ("daily_energy_production", "expected_daily_energy", "performance_deviation", "maximum_output", "average_daytime_output"):
 				setattr(self, field, 0)
 			for row in self.readings:
@@ -74,6 +81,9 @@ class Telemetry(Document):
 
 
 class AIRecommendation(Document):
+	def on_update(self):
+		sync_recommendation(self)
+
 	def before_insert(self):
 		frappe.db.get_value("Performance Alert", self.performance_alert, "name", for_update=True)
 
@@ -90,13 +100,20 @@ class AIRecommendation(Document):
 		if previous and not self.flags.eola_review:
 			frappe.throw("Recommendations are immutable audit records. Create a new recommendation instead.")
 		if self.is_new():
+			try:
+				validate_top_five(self.possible_causes, "Possible reasons")
+				validate_top_five(self.recommended_action, "Recommended actions")
+			except ValueError as exc:
+				frappe.throw(str(exc))
 			alert = frappe.get_doc("Performance Alert", self.performance_alert)
 			alert.check_permission("read")
 			if alert.status not in ("New Alert", "Under Review"):
 				frappe.throw("Recommendations require an open alert awaiting review.")
+			populate_tagged_readings(self, alert)
 			self.technician_decision = "Pending"
 			self.reviewed_by = self.reviewed_on = None
 			self.technician_modification = self.technician_remarks = None
+		self.ai_recommendation_text = recommendation_text(self)
 		if not 0 <= (self.confidence or 0) <= 100:
 			frappe.throw("Confidence must be between 0 and 100.")
 
@@ -111,9 +128,11 @@ class ESIssue(Document):
 			if previous.performance_alert and previous.status != self.status:
 				allowed = {
 					"New Alert": set(), "Dismissed": set(),
-					"Confirmed": {"In Progress", "On Hold", "Resolved"},
+					"Confirmed": {"Scheduled", "In Progress", "On Hold", "Resolved"},
+					"Scheduled": {"Re-scheduled", "In Progress", "On Hold", "Resolved"},
+					"Re-scheduled": {"In Progress", "On Hold", "Resolved"},
 					"In Progress": {"On Hold", "Resolved"},
-					"On Hold": {"In Progress", "Resolved"},
+					"On Hold": {"Scheduled", "Re-scheduled", "In Progress", "Resolved"},
 					"Resolved": {"Closed", "In Progress"},
 					"Closed": {"In Progress"},
 				}
@@ -125,6 +144,10 @@ class ESIssue(Document):
 				frappe.throw("Issue and alert must belong to the same solar system.")
 			if self.status not in ("New Alert", "Dismissed") and alert.technician_decision not in ("Accept", "Modify"):
 				frappe.throw("A technician must accept or modify the recommendation before service begins.")
+		if self.status in ("Scheduled", "Re-scheduled") and not self.get("scheduled_date"):
+			frappe.throw("Enter a scheduled date before scheduling the issue.")
+		if self.status == "Re-scheduled" and not (self.get("reschedule_reason") or "").strip():
+			frappe.throw("Enter a reason for re-scheduling the issue.")
 		if self.status in ("Resolved", "Closed"):
 			if not self.resolution:
 				frappe.throw("Enter resolution details before resolving the issue.")
@@ -142,7 +165,7 @@ class ESIssue(Document):
 class ESMaintenanceVisit(Document):
 	def validate(self):
 		issue = frappe.get_doc("ES Issue", self.issue)
-		if issue.status not in ("Confirmed", "In Progress", "On Hold"):
+		if issue.status not in ("Confirmed", "Scheduled", "Re-scheduled", "In Progress", "On Hold"):
 			frappe.throw("Maintenance visits require a confirmed, open service case.")
 		if issue.installed_solar_system != self.installed_solar_system or issue.service_type != "Site Service":
 			frappe.throw("A maintenance visit requires a Site Service issue for the same system.")

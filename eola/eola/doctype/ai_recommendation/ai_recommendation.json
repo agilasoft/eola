@@ -14,10 +14,12 @@
     "prompt_version",
     "input_summary",
     "finding",
+    "tagged_readings",
     "possible_causes",
     "recommended_action",
     "recommended_type_of_service",
     "supporting_evidence",
+    "ai_recommendation_text",
     "confidence",
     "ai_disclaimer",
     "technician_decision",
@@ -72,15 +74,26 @@
       "reqd": 1
     },
     {
-      "label": "Possible Causes",
-      "fieldname": "possible_causes",
-      "fieldtype": "Long Text"
+      "fieldname": "tagged_readings",
+      "label": "Tagged Telemetry Readings",
+      "fieldtype": "Table",
+      "options": "AI Recommendation Reading",
+      "read_only": 1,
+      "description": "Warning and Alert readings from the linked telemetry; Alert denotes critical underperformance."
     },
     {
-      "label": "Recommended Action",
+      "label": "Top 5 Possible Reasons",
+      "fieldname": "possible_causes",
+      "fieldtype": "Long Text",
+      "reqd": 1,
+      "description": "Enter five entries numbered 1. through 5., using one short, concise sentence per entry."
+    },
+    {
+      "label": "Top 5 Recommended Actions",
       "fieldname": "recommended_action",
       "fieldtype": "Long Text",
-      "reqd": 1
+      "reqd": 1,
+      "description": "Enter five entries numbered 1. through 5., using one short, concise sentence per entry."
     },
     {
       "label": "Recommended Type of Service",
@@ -93,6 +106,12 @@
       "label": "Supporting Evidence",
       "fieldname": "supporting_evidence",
       "fieldtype": "Long Text"
+    },
+    {
+      "fieldname": "ai_recommendation_text",
+      "label": "AI Recommendation",
+      "fieldtype": "Long Text",
+      "read_only": 1
     },
     {
       "label": "Confidence",

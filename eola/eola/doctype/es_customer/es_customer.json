@@ -12,7 +12,9 @@
     "email",
     "phone",
     "address",
-    "disabled"
+    "disabled",
+    "customer_lead",
+    "source_quotation"
   ],
   "fields": [
     {
@@ -49,6 +51,22 @@
       "label": "Disabled",
       "fieldname": "disabled",
       "fieldtype": "Check"
+    },
+    {
+      "fieldname": "customer_lead",
+      "label": "Customer Lead",
+      "fieldtype": "Link",
+      "options": "Customer Lead",
+      "unique": 1,
+      "read_only": 1
+    },
+    {
+      "fieldname": "source_quotation",
+      "label": "Source Quotation",
+      "fieldtype": "Link",
+      "options": "ES Quotation",
+      "unique": 1,
+      "read_only": 1
     }
   ],
   "permissions": [

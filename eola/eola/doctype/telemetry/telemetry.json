@@ -25,9 +25,15 @@
     "anomaly_detected",
     "performance_alert",
     "analysis_summary",
+    "ai_recommendation_text",
     "notes",
     "equipment",
-    "readings"
+    "readings",
+    "load_recorded",
+    "daily_load_energy",
+    "appliance_changes",
+    "alert_tags",
+    "data_quality_note"
   ],
   "fields": [
     {
@@ -156,6 +162,12 @@
       "read_only": 1
     },
     {
+      "fieldname": "ai_recommendation_text",
+      "label": "AI Recommendation",
+      "fieldtype": "Long Text",
+      "read_only": 1
+    },
+    {
       "label": "Notes",
       "fieldname": "notes",
       "fieldtype": "Small Text"
@@ -172,6 +184,35 @@
       "fieldtype": "Table",
       "options": "Hourly Telemetry Reading",
       "reqd": 1
+    },
+    {
+      "fieldname": "load_recorded",
+      "label": "Daily Consumption Recorded",
+      "fieldtype": "Check"
+    },
+    {
+      "fieldname": "daily_load_energy",
+      "label": "Daily Consumption (kWh)",
+      "fieldtype": "Float",
+      "non_negative": 1,
+      "depends_on": "load_recorded"
+    },
+    {
+      "fieldname": "appliance_changes",
+      "label": "Appliance / Load Changes",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "alert_tags",
+      "label": "Detected Alert Types",
+      "fieldtype": "Small Text",
+      "read_only": 1
+    },
+    {
+      "fieldname": "data_quality_note",
+      "label": "Data Quality",
+      "fieldtype": "Small Text",
+      "read_only": 1
     }
   ],
   "permissions": [

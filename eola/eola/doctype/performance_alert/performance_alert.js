@@ -1,13 +1,12 @@
 frappe.ui.form.on("Performance Alert", {
 	async refresh(frm) {
 		if (frm.is_new()) return;
-		frm.add_custom_button(__("Generate AI Recommendation"), async () => {
-			const { message } = await frappe.call({
-				method: "eola.api.generate_recommendation",
-				args: { alert_name: frm.doc.name },
-				freeze: true,
-			});
-			frappe.set_route("Form", "AI Recommendation", message);
+		frm.add_custom_button(__("View AI Recommendation"), () => {
+			if (frm.doc.ai_recommendation) {
+				frappe.set_route("Form", "AI Recommendation", frm.doc.ai_recommendation);
+			} else {
+				frappe.set_route("List", "AI Recommendation", { performance_alert: frm.doc.name });
+			}
 		});
 		frm.add_custom_button(__("Recommendations"), () =>
 			frappe.set_route("List", "AI Recommendation", { performance_alert: frm.doc.name })

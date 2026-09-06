@@ -1,0 +1,258 @@
+[
+  {
+    "item": "ES-ITEM-00001",
+    "expected_model": "ESS-TH5K",
+    "rate": 65000,
+    "stock": 8,
+    "source": "https://www.heliosoptimum.com/shop",
+    "basis": "Comparable-market estimate; not an exact-model supplier quote. Three-phase range estimated around the PHP 118,750 Deye 12kW listing; capacities interpolated/extrapolated. No verified Hopetrek price."
+  },
+  {
+    "item": "ES-ITEM-00002",
+    "expected_model": "ESS-TH6K",
+    "rate": 70000,
+    "stock": 5,
+    "source": "https://www.heliosoptimum.com/shop",
+    "basis": "Comparable-market estimate; not an exact-model supplier quote. Three-phase range estimated around the PHP 118,750 Deye 12kW listing; capacities interpolated/extrapolated. No verified Hopetrek price."
+  },
+  {
+    "item": "ES-ITEM-00003",
+    "expected_model": "ESS-TH8K",
+    "rate": 82000,
+    "stock": 3,
+    "source": "https://www.heliosoptimum.com/shop",
+    "basis": "Comparable-market estimate; not an exact-model supplier quote. Three-phase range estimated around the PHP 118,750 Deye 12kW listing; capacities interpolated/extrapolated. No verified Hopetrek price."
+  },
+  {
+    "item": "ES-ITEM-00004",
+    "expected_model": "ESS-TH10K",
+    "rate": 98000,
+    "stock": 0,
+    "source": "https://www.heliosoptimum.com/shop",
+    "basis": "Comparable-market estimate; not an exact-model supplier quote. Three-phase range estimated around the PHP 118,750 Deye 12kW listing; capacities interpolated/extrapolated. No verified Hopetrek price."
+  },
+  {
+    "item": "ES-ITEM-00005",
+    "expected_model": "ESS-TH12K",
+    "rate": 115000,
+    "stock": 2,
+    "source": "https://www.heliosoptimum.com/shop",
+    "basis": "Comparable-market estimate; not an exact-model supplier quote. Three-phase range estimated around the PHP 118,750 Deye 12kW listing; capacities interpolated/extrapolated. No verified Hopetrek price."
+  },
+  {
+    "item": "ES-ITEM-00006",
+    "expected_model": "ESS-TH15K",
+    "rate": 140000,
+    "stock": 1,
+    "source": "https://www.heliosoptimum.com/shop",
+    "basis": "Comparable-market estimate; not an exact-model supplier quote. Three-phase range estimated around the PHP 118,750 Deye 12kW listing; capacities interpolated/extrapolated. No verified Hopetrek price."
+  },
+  {
+    "item": "ES-ITEM-00007",
+    "expected_model": "ESS-TH20K",
+    "rate": 175000,
+    "stock": 0,
+    "source": "https://www.heliosoptimum.com/shop",
+    "basis": "Comparable-market estimate; not an exact-model supplier quote. Three-phase range estimated around the PHP 118,750 Deye 12kW listing; capacities interpolated/extrapolated. No verified Hopetrek price."
+  },
+  {
+    "item": "ES-ITEM-00008",
+    "expected_model": "ESS-TH25K",
+    "rate": 215000,
+    "stock": 0,
+    "source": "https://www.heliosoptimum.com/shop",
+    "basis": "Comparable-market estimate; not an exact-model supplier quote. Three-phase range estimated around the PHP 118,750 Deye 12kW listing; capacities interpolated/extrapolated. No verified Hopetrek price."
+  },
+  {
+    "item": "ES-ITEM-00009",
+    "expected_model": "SUN-SL-HP3K-A1",
+    "rate": 32000,
+    "stock": 6,
+    "source": "https://lakasolar.ph/news/deye-hybrid-inverter-philippines",
+    "basis": "Comparable-market estimate; not an exact-model supplier quote. Deye 3kW indicative range PHP 28,000-35,000; 3.6kW scaled estimate."
+  },
+  {
+    "item": "ES-ITEM-00010",
+    "expected_model": "SUN-SL-HP3K6-A1",
+    "rate": 37000,
+    "stock": 0,
+    "source": "https://lakasolar.ph/news/deye-hybrid-inverter-philippines",
+    "basis": "Comparable-market estimate; not an exact-model supplier quote. Deye 3kW indicative range PHP 28,000-35,000; 3.6kW scaled estimate."
+  },
+  {
+    "item": "ES-ITEM-00011",
+    "expected_model": "SUN-SL-HP5K-A1",
+    "rate": 45500,
+    "stock": 12,
+    "source": "https://www.solarmallph.com/",
+    "basis": "Comparable-market estimate; not an exact-model supplier quote. Deye 5kW PHP 45,500 and 6kW PHP 46,000; 6kW rounded toward Helios PHP 53,000."
+  },
+  {
+    "item": "ES-ITEM-00012",
+    "expected_model": "SUN-SL-HP6K-A1",
+    "rate": 50000,
+    "stock": 8,
+    "source": "https://www.solarmallph.com/",
+    "basis": "Comparable-market estimate; not an exact-model supplier quote. Deye 5kW PHP 45,500 and 6kW PHP 46,000; 6kW rounded toward Helios PHP 53,000."
+  },
+  {
+    "item": "ES-ITEM-00013",
+    "expected_model": "SUN-TH-HP5K-A1",
+    "rate": 65000,
+    "stock": 4,
+    "source": "https://www.heliosoptimum.com/shop",
+    "basis": "Comparable-market estimate; not an exact-model supplier quote. Three-phase range estimated around the PHP 118,750 Deye 12kW listing; capacities interpolated/extrapolated. No verified Hopetrek price."
+  },
+  {
+    "item": "ES-ITEM-00014",
+    "expected_model": "SUN-TH-HP6K-A1",
+    "rate": 70000,
+    "stock": 0,
+    "source": "https://www.heliosoptimum.com/shop",
+    "basis": "Comparable-market estimate; not an exact-model supplier quote. Three-phase range estimated around the PHP 118,750 Deye 12kW listing; capacities interpolated/extrapolated. No verified Hopetrek price."
+  },
+  {
+    "item": "ES-ITEM-00015",
+    "expected_model": "SUN-TH-HP8K-A1",
+    "rate": 82000,
+    "stock": 3,
+    "source": "https://www.heliosoptimum.com/shop",
+    "basis": "Comparable-market estimate; not an exact-model supplier quote. Three-phase range estimated around the PHP 118,750 Deye 12kW listing; capacities interpolated/extrapolated. No verified Hopetrek price."
+  },
+  {
+    "item": "ES-ITEM-00016",
+    "expected_model": "SUN-TH-HP10K-A1",
+    "rate": 98000,
+    "stock": 2,
+    "source": "https://www.heliosoptimum.com/shop",
+    "basis": "Comparable-market estimate; not an exact-model supplier quote. Three-phase range estimated around the PHP 118,750 Deye 12kW listing; capacities interpolated/extrapolated. No verified Hopetrek price."
+  },
+  {
+    "item": "ES-ITEM-00017",
+    "expected_model": "SUN-TH-HP12K-A1",
+    "rate": 115000,
+    "stock": 0,
+    "source": "https://www.heliosoptimum.com/shop",
+    "basis": "Comparable-market estimate; not an exact-model supplier quote. Three-phase range estimated around the PHP 118,750 Deye 12kW listing; capacities interpolated/extrapolated. No verified Hopetrek price."
+  },
+  {
+    "item": "ES-ITEM-00018",
+    "expected_model": "SUN-TL-HP5K-A1",
+    "rate": 68000,
+    "stock": 5,
+    "source": "https://www.heliosoptimum.com/shop",
+    "basis": "Comparable-market estimate; not an exact-model supplier quote. Three-phase range estimated around the PHP 118,750 Deye 12kW listing; capacities interpolated/extrapolated. No verified Hopetrek price."
+  },
+  {
+    "item": "ES-ITEM-00019",
+    "expected_model": "SUN-TL-HP6K-A1",
+    "rate": 73000,
+    "stock": 4,
+    "source": "https://www.heliosoptimum.com/shop",
+    "basis": "Comparable-market estimate; not an exact-model supplier quote. Three-phase range estimated around the PHP 118,750 Deye 12kW listing; capacities interpolated/extrapolated. No verified Hopetrek price."
+  },
+  {
+    "item": "ES-ITEM-00020",
+    "expected_model": "SUN-TL-HP8K-A1",
+    "rate": 85000,
+    "stock": 2,
+    "source": "https://www.heliosoptimum.com/shop",
+    "basis": "Comparable-market estimate; not an exact-model supplier quote. Three-phase range estimated around the PHP 118,750 Deye 12kW listing; capacities interpolated/extrapolated. No verified Hopetrek price."
+  },
+  {
+    "item": "ES-ITEM-00021",
+    "expected_model": "SUN-TL-HP10K-A1",
+    "rate": 101000,
+    "stock": 1,
+    "source": "https://www.heliosoptimum.com/shop",
+    "basis": "Comparable-market estimate; not an exact-model supplier quote. Three-phase range estimated around the PHP 118,750 Deye 12kW listing; capacities interpolated/extrapolated. No verified Hopetrek price."
+  },
+  {
+    "item": "ES-ITEM-00022",
+    "expected_model": "SUN-TL-HP12K-A1",
+    "rate": 118750,
+    "stock": 0,
+    "source": "https://www.heliosoptimum.com/shop",
+    "basis": "Comparable-market estimate; not an exact-model supplier quote. Three-phase range estimated around the PHP 118,750 Deye 12kW listing; capacities interpolated/extrapolated. No verified Hopetrek price."
+  },
+  {
+    "item": "ES-ITEM-00023",
+    "expected_model": "ESS-HB2@A-EU",
+    "rate": 27500,
+    "stock": 16,
+    "source": "https://www.heliosoptimum.com/shop",
+    "basis": "Comparable-market estimate; not an exact-model supplier quote. Per 2.56kWh HB2 module, not a full stack; scaled from the 5kWh battery class with estimated HV premium. Controllers/accessories excluded."
+  },
+  {
+    "item": "ES-ITEM-00024",
+    "expected_model": "",
+    "rate": 45000,
+    "stock": 8,
+    "source": "https://www.heliosoptimum.com/shop",
+    "basis": "Comparable-market estimate; not an exact-model supplier quote. 5kWh LV module class benchmark: Dyness DL5.0C PHP 45,000. LB5 catalog has no exact model; confirm before sale."
+  },
+  {
+    "item": "ES-ITEM-00025",
+    "expected_model": "ESS-LB16-W02",
+    "rate": 105000,
+    "stock": 3,
+    "source": "https://www.heliosoptimum.com/shop",
+    "basis": "Comparable-market estimate; not an exact-model supplier quote. 16kWh class estimate between Helios 15.36kWh PHP 95,000 and Solar Mall Deye 16kWh PHP 119,500."
+  },
+  {
+    "item": "ES-ITEM-00026",
+    "expected_model": "ESS-LB16-W01",
+    "rate": 105000,
+    "stock": 0,
+    "source": "https://www.heliosoptimum.com/shop",
+    "basis": "Comparable-market estimate; not an exact-model supplier quote. 16kWh class estimate between Helios 15.36kWh PHP 95,000 and Solar Mall Deye 16kWh PHP 119,500."
+  },
+  {
+    "item": "ES-ITEM-00027",
+    "expected_model": "ESS-LB5-W01",
+    "rate": 45000,
+    "stock": 10,
+    "source": "https://www.heliosoptimum.com/shop",
+    "basis": "Comparable-market estimate; not an exact-model supplier quote. 5kWh LV module class benchmark: Dyness DL5.0C PHP 45,000. LB5 catalog has no exact model; confirm before sale."
+  },
+  {
+    "item": "ES-ITEM-00028",
+    "expected_model": "ESS-LB5-R01",
+    "rate": 45000,
+    "stock": 1,
+    "source": "https://www.heliosoptimum.com/shop",
+    "basis": "Comparable-market estimate; not an exact-model supplier quote. 5kWh LV module class benchmark: Dyness DL5.0C PHP 45,000. LB5 catalog has no exact model; confirm before sale."
+  },
+  {
+    "item": "ES-ITEM-00029",
+    "expected_model": "ESS-HB5-R01",
+    "rate": 55000,
+    "stock": 0,
+    "source": "https://www.heliosoptimum.com/shop",
+    "basis": "Comparable-market estimate; not an exact-model supplier quote. Per 5.12kWh HV module; estimated premium over LV battery class. Stack controller/accessories excluded."
+  },
+  {
+    "item": "ES-ITEM-00030",
+    "expected_model": "ESS-HB5@A-EU",
+    "rate": 55000,
+    "stock": 6,
+    "source": "https://www.heliosoptimum.com/shop",
+    "basis": "Comparable-market estimate; not an exact-model supplier quote. Per 5.12kWh HV module; estimated premium over LV battery class. Stack controller/accessories excluded."
+  },
+  {
+    "item": "ES-ITEM-00031",
+    "expected_model": "ESA-MTD-A",
+    "rate": 2500,
+    "stock": 25,
+    "source": "https://shop.rss-ph.com/6-inverters",
+    "basis": "Comparable-market estimate; not an exact-model supplier quote. SRNE WiFi monitor PHP 2,500 used only as a price-class proxy; Hopetrek compatibility and price unverified."
+  },
+  {
+    "item": "ES-ITEM-00032",
+    "expected_model": "JAM72S30-550/MR/1500V",
+    "rate": 4700,
+    "stock": 120,
+    "source": "https://www.heliosoptimum.com/shop",
+    "basis": "Comparable-market estimate; not an exact-model supplier quote. JA Solar 600W PHP 5,125 scaled by 550/600 and rounded to PHP 4,700; different panel model/technology."
+  }
+]

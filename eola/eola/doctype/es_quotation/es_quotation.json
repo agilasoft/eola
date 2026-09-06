@@ -1,0 +1,281 @@
+{
+  "doctype": "DocType",
+  "name": "ES Quotation",
+  "module": "EOLA",
+  "engine": "InnoDB",
+  "field_order": [
+    "customer_lead",
+    "quotation_date",
+    "valid_till",
+    "status",
+    "contact_section",
+    "first_name",
+    "last_name",
+    "phone",
+    "email",
+    "country",
+    "full_address",
+    "project_section",
+    "property_type",
+    "ownership_status",
+    "roof_type",
+    "roof_shading",
+    "roof_age",
+    "roof_area",
+    "monthly_bill",
+    "electricity_provider",
+    "allocated_budget",
+    "desired_reduction",
+    "electricity_rate",
+    "grid_connection",
+    "backup_required",
+    "installation_timeline",
+    "comments",
+    "system_type",
+    "equipment_section",
+    "items",
+    "total",
+    "terms",
+    "notes",
+    "customer",
+    "accepted_on"
+  ],
+  "fields": [
+    {
+      "fieldname": "customer_lead",
+      "label": "Customer Lead",
+      "fieldtype": "Link",
+      "options": "Customer Lead",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "quotation_date",
+      "label": "Quotation date",
+      "fieldtype": "Date",
+      "default": "Today",
+      "reqd": 1
+    },
+    {
+      "fieldname": "valid_till",
+      "label": "Valid until",
+      "fieldtype": "Date"
+    },
+    {
+      "fieldname": "status",
+      "label": "Status",
+      "fieldtype": "Select",
+      "options": "Draft\nSent\nAccepted\nDeclined\nExpired",
+      "default": "Draft",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "contact_section",
+      "label": "Contact details",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "first_name",
+      "label": "First name",
+      "fieldtype": "Data",
+      "reqd": 1
+    },
+    {
+      "fieldname": "last_name",
+      "label": "Last name",
+      "fieldtype": "Data",
+      "reqd": 1
+    },
+    {
+      "fieldname": "phone",
+      "label": "Phone number",
+      "fieldtype": "Data",
+      "reqd": 1
+    },
+    {
+      "fieldname": "email",
+      "label": "Email",
+      "fieldtype": "Data",
+      "reqd": 1
+    },
+    {
+      "fieldname": "country",
+      "label": "Country",
+      "fieldtype": "Link",
+      "options": "Country",
+      "reqd": 1,
+      "default": "Philippines"
+    },
+    {
+      "fieldname": "full_address",
+      "label": "Full address",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "project_section",
+      "label": "Project details",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "property_type",
+      "label": "Property type",
+      "fieldtype": "Select",
+      "options": "Residential\nCommercial\nIndustrial\nAgricultural\nOther"
+    },
+    {
+      "fieldname": "ownership_status",
+      "label": "Ownership status",
+      "fieldtype": "Select",
+      "options": "\nOwner\nTenant\nOther"
+    },
+    {
+      "fieldname": "roof_type",
+      "label": "Roof type",
+      "fieldtype": "Select",
+      "options": "\nMetal\nTile\nConcrete\nAsphalt shingle\nOther\nNot sure"
+    },
+    {
+      "fieldname": "roof_shading",
+      "label": "Shading on roof",
+      "fieldtype": "Select",
+      "options": "\nNone\nLight\nModerate\nHeavy\nNot sure"
+    },
+    {
+      "fieldname": "roof_age",
+      "label": "Roof age (approximate years)",
+      "fieldtype": "Float",
+      "non_negative": 1
+    },
+    {
+      "fieldname": "monthly_bill",
+      "label": "Average monthly electricity bill (PHP)",
+      "fieldtype": "Currency",
+      "options": "PHP"
+    },
+    {
+      "fieldname": "electricity_provider",
+      "label": "Current electricity provider",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "allocated_budget",
+      "label": "Allocated budget (PHP)",
+      "fieldtype": "Currency",
+      "options": "PHP"
+    },
+    {
+      "fieldname": "desired_reduction",
+      "label": "Desired bill reduction (%)",
+      "fieldtype": "Percent"
+    },
+    {
+      "fieldname": "electricity_rate",
+      "label": "Electricity rate (PHP/kWh)",
+      "fieldtype": "Float",
+      "default": "12",
+      "description": "Planning assumption. Replace with your actual per-kWh rate."
+    },
+    {
+      "fieldname": "grid_connection",
+      "label": "Grid connection",
+      "fieldtype": "Select",
+      "options": "Connected\nNo grid connection",
+      "default": "Connected"
+    },
+    {
+      "fieldname": "backup_required",
+      "label": "Battery backup requested",
+      "fieldtype": "Check"
+    },
+    {
+      "fieldname": "installation_timeline",
+      "label": "Timeline for installation",
+      "fieldtype": "Select",
+      "options": "\nAs soon as possible\nWithin 3 months\n3\u20136 months\n6\u201312 months\nJust exploring"
+    },
+    {
+      "fieldname": "comments",
+      "label": "Additional comments or questions",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "system_type",
+      "label": "System type",
+      "fieldtype": "Select",
+      "options": "\nGrid-Tied\nHybrid\nOff-Grid\nOther"
+    },
+    {
+      "fieldname": "equipment_section",
+      "label": "Equipment and pricing",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "items",
+      "label": "Equipment",
+      "fieldtype": "Table",
+      "options": "ES Quotation Item",
+      "reqd": 1
+    },
+    {
+      "fieldname": "total",
+      "label": "Total (PHP)",
+      "fieldtype": "Currency",
+      "options": "PHP",
+      "read_only": 1
+    },
+    {
+      "fieldname": "terms",
+      "label": "Terms and conditions",
+      "fieldtype": "Text Editor"
+    },
+    {
+      "fieldname": "notes",
+      "label": "Quotation notes",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "roof_area",
+      "label": "Usable roof area (m\u00b2)",
+      "fieldtype": "Float",
+      "non_negative": 1,
+      "description": "Optional. Area available for solar panels after setbacks and obstructions."
+    },
+    {
+      "fieldname": "customer",
+      "label": "ES Customer",
+      "fieldtype": "Link",
+      "options": "ES Customer",
+      "read_only": 1
+    },
+    {
+      "fieldname": "accepted_on",
+      "label": "Accepted On",
+      "fieldtype": "Date",
+      "read_only": 1
+    }
+  ],
+  "autoname": "ES-QTN-.#####",
+  "track_changes": 1,
+  "title_field": "first_name",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "report": 1,
+      "print": 1,
+      "delete": 1,
+      "export": 1
+    },
+    {
+      "role": "EOLA Technician",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "report": 1,
+      "print": 1
+    }
+  ],
+  "sort_field": "creation",
+  "sort_order": "DESC"
+}

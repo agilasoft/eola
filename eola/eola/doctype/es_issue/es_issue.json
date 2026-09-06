@@ -15,8 +15,11 @@
     "telemetry",
     "performance_alert",
     "ai_recommendation",
+    "ai_recommendation_text",
     "installed_solar_system",
     "service_type",
+    "scheduled_date",
+    "reschedule_reason",
     "resolution_details",
     "resolution",
     "resolved_date",
@@ -40,9 +43,10 @@
       "label": "Status",
       "fieldname": "status",
       "fieldtype": "Select",
-      "options": "New Alert\nConfirmed\nIn Progress\nOn Hold\nResolved\nClosed\nDismissed",
+      "options": "New Alert\nConfirmed\nScheduled\nRe-scheduled\nIn Progress\nOn Hold\nResolved\nClosed\nDismissed",
       "default": "New Alert",
-      "in_list_view": 1
+      "in_list_view": 1,
+      "description": "New Alert: needs technician review. Confirmed: approved, awaiting scheduling. Resolution is recorded on this issue."
     },
     {
       "label": "Priority",
@@ -70,10 +74,16 @@
       "unique": 1
     },
     {
-      "label": "AI Recommendation",
+      "label": "AI Recommendation Record",
       "fieldname": "ai_recommendation",
       "fieldtype": "Link",
       "options": "AI Recommendation"
+    },
+    {
+      "fieldname": "ai_recommendation_text",
+      "label": "AI Recommendation",
+      "fieldtype": "Long Text",
+      "read_only": 1
     },
     {
       "label": "Installed Solar System",
@@ -87,6 +97,20 @@
       "fieldname": "service_type",
       "fieldtype": "Select",
       "options": "Remote Work\nSite Service"
+    },
+    {
+      "fieldname": "scheduled_date",
+      "label": "Scheduled Date",
+      "fieldtype": "Date",
+      "depends_on": "eval:[\"Scheduled\", \"Re-scheduled\"].includes(doc.status)",
+      "mandatory_depends_on": "eval:[\"Scheduled\", \"Re-scheduled\"].includes(doc.status)"
+    },
+    {
+      "fieldname": "reschedule_reason",
+      "label": "Reschedule Reason",
+      "fieldtype": "Small Text",
+      "depends_on": "eval:doc.status == \"Re-scheduled\"",
+      "mandatory_depends_on": "eval:doc.status == \"Re-scheduled\""
     },
     {
       "label": "Resolution Details",

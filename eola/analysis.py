@@ -41,24 +41,37 @@ def power(value):
 	return value
 
 
-def analyze(readings, baseline, system_type):
+def analyze(readings, baseline, system_type, allow_missing=False):
 	if system_type != "Grid-Tied":
 		raise ValueError("MVP underperformance analysis supports Grid-Tied systems only. Off-Grid and Hybrid analysis require load, battery and curtailment context.")
-	actual = hourly_map(readings, "reading_time")
+	if allow_missing:
+		actual = {}
+		for row in readings:
+			hour = hour_index(row.get('reading_time'))
+			if hour in actual:
+				raise ValueError('Duplicate hours are not allowed.')
+			actual[hour] = row
+	else:
+		actual = hourly_map(readings, "reading_time")
 	expected = hourly_map(baseline, "hour")
 	rows = []
 	for hour in range(24):
-		a, e = power(actual[hour].get("ac_power")), power(expected[hour].get("expected_power"))
+		e = power(expected[hour].get("expected_power"))
+		if hour not in actual or (allow_missing and actual[hour].get("inverter_status") == "Offline"):
+			rows.append(dict(hour=hour, actual=None, expected=e, deviation=None, status='Missing'))
+			continue
+		a = power(actual[hour].get("ac_power"))
 		deviation = round((a - e) / e * 100, 8) if e else 0
 		status = "Alert" if e > 0 and deviation <= -30 else "Warning" if e > 0 and deviation <= -15 else "Normal"
 		rows.append(dict(hour=hour, actual=a, expected=e, deviation=deviation, status=status))
 	daytime = [r for r in rows if r['expected'] > 0]
 	if not daytime:
 		raise ValueError("The baseline must contain positive daytime expected power.")
-	bad = [r for r in rows if r['status'] != 'Normal']
-	energy, expected_energy = sum(r['actual'] for r in rows), sum(r['expected'] for r in rows)
+	bad = [r for r in rows if r['status'] in ('Warning', 'Alert')]
+	energy, expected_energy = sum(r['actual'] for r in rows if r['actual'] is not None), sum(r['expected'] for r in rows)
 	return dict(rows=rows, daily_energy=energy, expected_energy=expected_energy,
 		deviation=(energy - expected_energy) / expected_energy * 100,
-		maximum=max(r['actual'] for r in rows), average=sum(r['actual'] for r in daytime) / len(daytime),
+		coverage_hours=sum(r['actual'] is not None for r in rows), missing_hours=[r['hour'] for r in rows if r['actual'] is None],
+		maximum=max((r['actual'] for r in rows if r['actual'] is not None), default=0), average=sum(r['actual'] for r in daytime if r['actual'] is not None) / max(1, sum(r['actual'] is not None for r in daytime)),
 		status='Critical' if any(r['status'] == 'Alert' for r in bad) else 'Warning' if bad else 'Normal',
 		bad=bad)

@@ -22,7 +22,10 @@
     "monitoring_status",
     "last_telemetry_date",
     "last_performance_status",
-    "notes"
+    "notes",
+    "temperature_alert_limit",
+    "ac_voltage_min",
+    "ac_voltage_max"
   ],
   "fields": [
     {
@@ -122,6 +125,27 @@
       "label": "Notes",
       "fieldname": "notes",
       "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "temperature_alert_limit",
+      "label": "Temperature Alert Limit (\u00b0C)",
+      "fieldtype": "Float",
+      "non_negative": 1,
+      "description": "Optional equipment-specific limit; zero disables this check."
+    },
+    {
+      "fieldname": "ac_voltage_min",
+      "label": "Minimum AC Voltage (V)",
+      "fieldtype": "Float",
+      "non_negative": 1,
+      "description": "Optional equipment-specific limit; zero disables this check."
+    },
+    {
+      "fieldname": "ac_voltage_max",
+      "label": "Maximum AC Voltage (V)",
+      "fieldtype": "Float",
+      "non_negative": 1,
+      "description": "Optional equipment-specific limit; zero disables this check."
     }
   ],
   "permissions": [

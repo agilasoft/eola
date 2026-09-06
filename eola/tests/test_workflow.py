@@ -19,6 +19,9 @@ class Record(SimpleNamespace):
 		if getattr(self, "denied", False):
 			raise PermissionError(permission)
 
+	def reload(self):
+		self.reloaded = True
+
 	def save(self):
 		self.saved = True
 
@@ -55,6 +58,8 @@ class TestWorkflow(unittest.TestCase):
 		api.review_recommendation("AI-1", "Modify", "Check remotely first")
 		self.assertIn("Check remotely first", self.issue.description)
 		self.assertEqual(self.issue.status, "Confirmed")
+		self.assertTrue(self.alert.reloaded)
+		self.assertTrue(self.issue.reloaded)
 
 	def test_reject_requires_reason_and_dismisses(self):
 		with self.assertRaises(ValueError):
@@ -104,3 +109,46 @@ class TestWorkflow(unittest.TestCase):
 			database.get_value.return_value = "Confirmed"
 			ESIssue.on_update(Record(performance_alert="ALT-1", status="Resolved"))
 			database.set_value.assert_called_once_with("Performance Alert", "ALT-1", "status", "Resolved")
+
+	def test_approval_does_not_resolve_alert(self):
+		api.review_recommendation("AI-1", "Accept")
+		self.assertEqual(self.alert.status, "Confirmed")
+		self.assertEqual(self.issue.status, "Confirmed")
+
+	def test_schedule_and_reschedule_require_details(self):
+		self.alert.installed_solar_system = "SYS-1"
+		self.alert.technician_decision = "Accept"
+		previous = Record(status="Confirmed", performance_alert="ALT-1", installed_solar_system="SYS-1")
+		issue = Record(status="Scheduled", performance_alert="ALT-1", installed_solar_system="SYS-1", flags=Record(eola_review=False), get_doc_before_save=lambda: previous)
+		with self.assertRaisesRegex(ValueError, "scheduled date"):
+			ESIssue.validate(issue)
+		issue.scheduled_date = "2026-09-10"
+		ESIssue.validate(issue)
+		self.assertIsNone(issue.resolved_date)
+		previous.status = "Scheduled"
+		issue.status = "Re-scheduled"
+		with self.assertRaisesRegex(ValueError, "reason"):
+			ESIssue.validate(issue)
+		issue.reschedule_reason = "Customer requested another day"
+		issue.scheduled_date = "2026-09-11"
+		ESIssue.validate(issue)
+		self.assertIsNone(issue.resolved_date)
+
+	def test_scheduled_case_keeps_alert_pending_service(self):
+		for status in ("Scheduled", "Re-scheduled", "In Progress", "On Hold"):
+			with self.subTest(status=status), patch.object(api.frappe, "db", new=Mock()) as database:
+				database.get_value.return_value = "Confirmed"
+				ESIssue.on_update(Record(performance_alert="ALT-1", status=status))
+				database.set_value.assert_not_called()
+
+	def test_dashboard_links_issues_and_counts_active_cases(self):
+		statuses = ["New Alert", "Confirmed", "Scheduled", "Re-scheduled", "In Progress", "On Hold", "Resolved", "Dismissed"]
+		issues = [Record(name=f"ISS-{i}", status=status) for i, status in enumerate(statuses)]
+		alert = Record(name="ALT-1", status="Confirmed", installed_solar_system="SYS-1", ai_recommendation=None, resolution_issue="ISS-2")
+		with patch.object(api.frappe, "get_list", side_effect=[["SYS-1"], [alert], ["ALT-1"], issues]), patch.object(api.frappe, "has_permission", return_value=True), patch.object(api, "nowdate", return_value="2026-09-05"):
+			result = api.dashboard()
+		self.assertEqual(result["maintenance_cases"], 5)
+		self.assertEqual(result["systems_needing_review"], 0)
+		self.assertEqual(result["issues"], issues)
+		self.assertEqual(result["alerts"][0].issue.status, "Scheduled")
+		self.assertFalse(result["alerts"][0].can_review)

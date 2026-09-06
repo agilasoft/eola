@@ -1,0 +1,39 @@
+{
+  "doctype": "Workspace Sidebar",
+  "name": "Eola",
+  "title": "Eola",
+  "app": "eola",
+  "module": "EOLA",
+  "standard": 1,
+  "header_icon": "energy",
+  "items": [
+    {
+      "type": "Link",
+      "label": "Home",
+      "link_type": "Workspace",
+      "link_to": "EOLA",
+      "icon": "home"
+    },
+    {
+      "type": "Link",
+      "label": "EOLA Dashboard",
+      "link_type": "Page",
+      "link_to": "eola-dashboard",
+      "icon": "chart"
+    },
+    {
+      "type": "Link",
+      "label": "Customer Inquiry",
+      "link_type": "Page",
+      "link_to": "customer-inquiry",
+      "icon": "add"
+    },
+    {
+      "type": "Link",
+      "label": "Customer Leads",
+      "link_type": "DocType",
+      "link_to": "Customer Lead",
+      "icon": "users"
+    }
+  ]
+}
